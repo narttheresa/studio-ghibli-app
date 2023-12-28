@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+
+
+.main-container {
+    background-image: url(../Assets/studio-ghibli-bg.jpg);
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.film-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+.film-card {
+    background-color: rgb(228, 228, 247);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    opacity: 0.8;
+    
+
+}
+
+
+.film-card img {
+    width: 80%;
+    height: 50%;
+    border-radius: 5px;
+    object-fit: contain;
+}

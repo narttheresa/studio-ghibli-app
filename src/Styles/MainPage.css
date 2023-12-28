@@ -1,0 +1,53 @@
+.main-page {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: white;
+}
+
+.main-container {
+    padding: 0;
+    margin: 0;
+}
+
+.bg-image {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+
+.bg-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+.gif-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.content {
+    color: rgba(255, 255, 255, 0.609);
+    text-align: center;
+    transition: color 0.5s, transform 0.1s;
+}
+
+.content:hover {
+    color: rgb(234, 206, 61);
+}
