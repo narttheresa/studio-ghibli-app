@@ -1,28 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "../Styles/NavBar.css";
 
+
+
 function NavBar() {
+  
+
+  const [isSticky, setIsSticky] = useState(false);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const navbar = document.querySelector(".navbar");
-      const scrollPosition = window.pageYOffset;
-
-      if (scrollPosition > 100) {
-        // Adjust the threshold as needed
-        navbar.classList.add("transparent");
-      } else {
-        navbar.classList.remove("transparent");
-      }
-    };
-
+    function handleScroll() {
+      setIsSticky(window.scrollY > 40);
+    }
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
-    <div>
-      <nav className="navbar">
+    <div className="body">
+      <nav
+        className="navbar"
+        style={{ position: isSticky ? "fixed" : "relative", top: 0 }}
+      >
         <ul>
           <li>
             <NavLink to="/" activeClassName="active">

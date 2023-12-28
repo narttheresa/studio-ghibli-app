@@ -13,7 +13,7 @@ function FilmList() {
                 setFilms(resp.data);
             })
             .catch(error => {
-                console.log("Error fetching gilms:" , error);
+                console.log("Error fetching films:" , error);
             })
     },[]);
 
