@@ -49,5 +49,10 @@
 }
 
 .content:hover {
-    color: rgb(227, 188, 102);
+    color: rgb(110, 185, 222);
+}
+
+.content h1 {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 80px;
 }

@@ -3,8 +3,8 @@
     padding: 20px;
     display: flex;
     justify-content: center;
-    background-color: rgb(55, 100, 140);
-    font-size: 1.2rem;
+    background-image: linear-gradient(to bottom right, rgb(35, 83, 131), rgba(100, 86, 83, 0.792));
+    font-size: 1.5rem;
     z-index:999;
     width: 100%;
     opacity: 0.9;
@@ -25,6 +25,7 @@
     color: rgb(0, 0, 0);
     font-weight: 700;
     transition: color 0.5s, transform 0.1s;
+    font-family: 'Shadows Into Light', cursive;
 }
 
 .navbar a:hover {
@@ -32,7 +33,7 @@
 }
 
 .navbar .active {
-    background-color: rgba(92, 156, 191, 0.8);
+    background-color: rgba(75, 123, 147, 0.8);
     border-radius: 5px;
     
 }
