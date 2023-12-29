@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchFilms } from "../Api";
 import "../Styles/FilmList.css";
 
+
 function FilmList() {
   const [films, setFilms] = useState([]);
   const [sortOption, setSortOption] = useState("");
@@ -55,7 +56,7 @@ function FilmList() {
   return (
     <div className="main-container">
       <h2>Studio Ghibli Films</h2>
-      <div>
+      <div className="sort-wrapper">
         <label htmlFor="sortOption">Sort by:</label>
         <select id="sortOption" value={sortOption} onChange={handleSortChange}>
           <option value="">Select an option</option>
@@ -96,7 +97,7 @@ function FilmList() {
             <small>
               {film.release_date} | {film.running_time}min
             </small>
-            <p>{film.description}</p>
+            <p className="description">{film.description}</p>
           </div>
         ))}
       </div>

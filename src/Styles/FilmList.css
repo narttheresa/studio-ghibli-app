@@ -8,17 +8,55 @@
 
 
 .main-container {
-    background-image: url(../Assets/studio-ghibli-bg.jpg);
+    background-image: url(../Assets/ghibli-bg.jpg);
+    background-size: auto;
+    image-rendering: -webkit-optimize-contrast;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+.sort-wrapper label {
+    margin-right: 10px;
+    align-content: center;
+    font-size: 20px;
+    padding: 10px;
+}
+
+
+
+.sort-wrapper select {
+    background-color: #6091be64;
+    color: rgb(72, 69, 69);
+    margin-bottom: 10px;
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    cursor: pointer;
+}
+
+
+
+option {
+    padding: 30px;
+    background-color: rgba(51, 84, 104, 0.546);
+}
+
+
 h2 {
-    padding: 10px 0;
+    padding: 30px 0;
     margin: 0;
     text-align: center;
     font-family: 'Shadows Into Light', cursive;
-    font-size: xx-large;
+    font-size: 50px;
 }
 
 .film-container {
@@ -26,18 +64,19 @@ h2 {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    padding: 20px;
 }
 
 
 .film-card {
-    background-image: linear-gradient(to bottom, rgb(51, 121, 162), rgb(0, 162, 255));
+    background-image: linear-gradient(to bottom, rgb(51, 121, 162), rgb(145, 163, 173));
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 400px;
     text-align: center;
     opacity: 0.8;
-    
+
 
 }
 
@@ -47,4 +86,8 @@ h2 {
     height: 50%;
     border-radius: 5px;
     object-fit: contain;
+}
+
+.film-card .description {
+    text-align: justify;
 }
