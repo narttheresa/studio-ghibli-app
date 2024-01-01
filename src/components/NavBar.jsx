@@ -42,7 +42,7 @@ function NavBar() {
           </li>
           <li>
             <NavLink to="/favourites" activeClassName="active">
-              Add To Favourites
+              Favourites
             </NavLink>
           </li>
           <li>

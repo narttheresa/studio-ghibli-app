@@ -3,10 +3,10 @@ import NavBar from "./components/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./components/MainPage";
 import FilmList from "./components/FilmList";
-import PersonList from "./components/PersonList";
+import CharacterList from "./components/CharacterList";
 import FavouriteList from "./components/FavouriteList";
 import Quiz from "./components/Quiz";
-import "./App.css"
+
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/films" element={<FilmList />} />
-            <Route path="/people" element={<PersonList />} />
+            <Route path="/people" element={<CharacterList />} />
             <Route path="/favourites" element={<FavouriteList />} />
             <Route path="/quiz" element={<Quiz />} />
             

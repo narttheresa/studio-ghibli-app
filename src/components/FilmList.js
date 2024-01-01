@@ -3,10 +3,33 @@ import { fetchFilms } from "../Api";
 import "../Styles/FilmList.css";
 
 
+
 function FilmList() {
   const [films, setFilms] = useState([]);
   const [sortOption, setSortOption] = useState("");
   const [isAscending, setIsAscending] = useState(true);
+  
+
+//fix this url with an updated one 
+  function handleAddToFavourites(film) {
+    fetch("http://localhost:3000/favourites", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({filmId: film.id})
+    })   
+    .then((resp) => {
+      if(!resp.ok) {
+        throw new Error(`HTTP error... Status: ${resp.status}`)
+      }
+    })
+    .catch((error) => {
+      console.error("error adding your films:", error);
+    })
+  }
+
+
 
   useEffect(() => {
     fetchFilms()
@@ -14,7 +37,7 @@ function FilmList() {
         setFilms(resp.data);
       })
       .catch((error) => {
-        console.log("Error fetching films:", error);
+        console.error("Error fetching films:", error);
       });
   }, []);
 
@@ -98,6 +121,7 @@ function FilmList() {
               {film.release_date} | {film.running_time}min
             </small>
             <p className="description">{film.description}</p>
+            <button onClick={() => handleAddToFavourites(film.id)}>Add To Favourites</button>
           </div>
         ))}
       </div>
