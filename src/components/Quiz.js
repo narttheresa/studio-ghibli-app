@@ -9,6 +9,7 @@ function Quiz({ questions }) {
   const [answer, setAnswer] = useState(null);
   const [result, setResult] = useState(resultInitialState);
   const [showResult, setShowResult] = useState(false)
+  
 
   const { question, choices, correctAnswer } = questions[currentQuestion];
 
@@ -21,10 +22,10 @@ function Quiz({ questions }) {
     }
   }
 
-  function onClickNext() {
+  function onClickNext(finalAnswer) {
     setAnswerIndex(null);
     setResult((previous) =>
-      answer
+      finalAnswer
         ? {
             ...previous,
             score: previous.score + 5,
@@ -49,7 +50,8 @@ function Quiz({ questions }) {
   }
 
   function handleTimeUp() {
-    
+    setAnswer(false);
+    onClickNext(false);
   }
 
   return (
@@ -72,7 +74,7 @@ function Quiz({ questions }) {
             ))}
           </ul>
           <div className="button-wrapper">
-            <button onClick={onClickNext} disabled={answerIndex === null}>
+            <button onClick={() => onClickNext(answer)} disabled={answerIndex === null}>
               {currentQuestion === question.length - 1 ? "Finish" : "Next"}
             </button>
           </div>
