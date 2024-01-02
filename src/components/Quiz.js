@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../Styles/Quiz.css";
 import { resultInitialState } from "../Data/Questions";
+import QuizTimer from "./QuizTimer";
 
 function Quiz({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -47,10 +48,15 @@ function Quiz({ questions }) {
     setShowResult(false);
   }
 
+  function handleTimeUp() {
+    
+  }
+
   return (
     <div className="quiz-wrapper">
         {!showResult ? (<div className="quiz-container">
         <div>
+        <QuizTimer duration={10} onTimeUp={handleTimeUp} />   
           <span className="active-question-num">{currentQuestion + 1}</span>
           <span className="total-question-num">/{questions.length}</span>
           <h2>{question}</h2>

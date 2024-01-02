@@ -19,6 +19,7 @@
     box-sizing: border-box;
     margin-top: 100px;
     padding: 30px 50px;
+    position: relative;
 }
 
 .quiz-container h2 {
@@ -99,7 +100,8 @@
 }
 
 .result h3 {
-    font-size: 30px;
+    font-size: 40px;
+    font-family: 'Shadows Into Light', cursive;
     text-align: center;
     letter-spacing: 1.5px;
     margin-bottom: 40px;
