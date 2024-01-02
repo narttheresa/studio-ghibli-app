@@ -7,6 +7,7 @@ function Quiz({ questions }) {
   const [answerIndex, setAnswerIndex] = useState(null);
   const [answer, setAnswer] = useState(null);
   const [result, setResult] = useState(resultInitialState);
+  const [showResult, setShowResult] = useState(false)
 
   const { question, choices, correctAnswer } = questions[currentQuestion];
 
@@ -37,12 +38,18 @@ function Quiz({ questions }) {
         setCurrentQuestion(currentQuestion + 1)
     } else {
         setCurrentQuestion(0);
+        setShowResult(true);
     }
+  }
+
+  function onTryAgain() {
+    setResult(resultInitialState);
+    setShowResult(false);
   }
 
   return (
     <div className="quiz-wrapper">
-      <div className="quiz-container">
+        {!showResult ? (<div className="quiz-container">
         <div>
           <span className="active-question-num">{currentQuestion + 1}</span>
           <span className="total-question-num">/{questions.length}</span>
@@ -64,7 +71,23 @@ function Quiz({ questions }) {
             </button>
           </div>
         </div>
-      </div>
+      </div>) : <div className="result">
+        <h3>Result</h3>
+        <p>
+            Total Questions: <span>{questions.length}</span>
+        </p>
+        <p>
+            Total Score: <span>{result.correctAnswers}</span>
+        </p>
+        <p>
+            Correct Answers: <span>{result.correctAnswers}</span>
+        </p>
+        <p>
+            Wrong Answers: <span>{result.wrongAnswers}</span>
+        </p>
+        <button onClick={onTryAgain}>Try Again</button>
+        </div>}
+      
     </div>
   );
 }
