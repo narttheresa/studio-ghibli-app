@@ -6,8 +6,7 @@ import FilmList from "./components/FilmList";
 import CharacterList from "./components/CharacterList";
 import FavouriteList from "./components/FavouriteList";
 import Quiz from "./components/Quiz";
-
-
+import { jsQuizz } from "./Data/Questions";
 
 function App() {
   return (
@@ -21,8 +20,7 @@ function App() {
             <Route path="/films" element={<FilmList />} />
             <Route path="/people" element={<CharacterList />} />
             <Route path="/favourites" element={<FavouriteList />} />
-            <Route path="/quiz" element={<Quiz />} />
-            
+            <Route path="/quiz" element={<Quiz questions={jsQuizz.questions} />} />
           </Routes>
         </BrowserRouter>
       </header>
