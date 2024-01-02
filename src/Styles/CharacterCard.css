@@ -3,8 +3,36 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding:0;
 }
 
-.main-character.card {
-   background-color: bisque;
+.main-character-container {
+    padding: 20px;
+}
+
+.character-card  {
+    background-image: linear-gradient(to bottom, rgb(51, 121, 162), rgb(145, 163, 173));
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    opacity: 0.8;
+    word-spacing: 5px;
+}
+
+
+.character-card ul {
+    list-style-type: none;
+}
+
+.character-card h3 {
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: bolder;
+    font-size: 30px;
+    padding-bottom: 15px;
+}
+
+.character-card p {
+    padding: 5px;
 }

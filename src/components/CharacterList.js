@@ -1,9 +1,9 @@
-
-import React , { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CharacterCard from "./CharacterCard";
 import { fetchPeople } from "../Api";
 import axios from "axios";
-
+import "../Styles/CharacterList.css";
+import "../Styles/CharacterCard.css";
 
 function CharacterList() {
   const [characters, setCharacters] = useState([]);
@@ -41,19 +41,22 @@ function CharacterList() {
   }, []);
 
   return (
-    <div>
+    <div className="character-list-wrapper">
       <h2>Studio Ghibli Characters</h2>
-      {characters.map((character) => (
-        <CharacterCard
-          key={character.id}
-          name={character.name}
-          gender={character.gender}
-          age={character.age}
-          films={character.films}
-        />
-      ))}
+
+      <div className="character-container">
+        {characters.map((character) => (
+          <CharacterCard
+            key={character.id}
+            name={character.name}
+            gender={character.gender}
+            age={character.age}
+            films={character.films}
+          />
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default CharacterList;
