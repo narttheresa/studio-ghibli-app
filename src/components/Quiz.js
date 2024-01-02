@@ -8,8 +8,8 @@ function Quiz({ questions }) {
   const [answerIndex, setAnswerIndex] = useState(null);
   const [answer, setAnswer] = useState(null);
   const [result, setResult] = useState(resultInitialState);
-  const [showResult, setShowResult] = useState(false)
-  
+  const [showResult, setShowResult] = useState(false);
+  const [showQuizTimer, setShowQuizTimer] = useState(true);
 
   const { question, choices, correctAnswer } = questions[currentQuestion];
 
@@ -24,11 +24,12 @@ function Quiz({ questions }) {
 
   function onClickNext(finalAnswer) {
     setAnswerIndex(null);
+    setShowQuizTimer(false);
     setResult((previous) =>
       finalAnswer
         ? {
             ...previous,
-            score: previous.score + 5,
+            score: previous.score + 1,
             correctAnswers: previous.correctAnswers + 1,
           }
         : {
@@ -36,12 +37,16 @@ function Quiz({ questions }) {
             wrongAnswers: previous.wrongAnswers + 1,
           }
     );
-    if(currentQuestion !== questions.length - 1) {
-        setCurrentQuestion(currentQuestion + 1)
+    if (currentQuestion !== questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
     } else {
-        setCurrentQuestion(0);
-        setShowResult(true);
+      setCurrentQuestion(0);
+      setShowResult(true);
     }
+
+    setTimeout(() => {
+        setShowQuizTimer(true);
+    })
   }
 
   function onTryAgain() {
@@ -56,46 +61,53 @@ function Quiz({ questions }) {
 
   return (
     <div className="quiz-wrapper">
-        {!showResult ? (<div className="quiz-container">
-        <div>
-        <QuizTimer duration={10} onTimeUp={handleTimeUp} />   
-          <span className="active-question-num">{currentQuestion + 1}</span>
-          <span className="total-question-num">/{questions.length}</span>
-          <h2>{question}</h2>
-          <ul>
-            {choices.map((answer, index) => (
-              <li
-                key={answer}
-                onClick={() => onAnswerClick(answer, index)}
-                className={answerIndex === index ? "selected-answer" : null}
+      {!showResult ? (
+        <div className="quiz-container">
+          
+            {showQuizTimer && (
+              <QuizTimer duration={10} onTimeUp={handleTimeUp} />
+            )}
+            <span className="active-question-num">{currentQuestion + 1}</span>
+            <span className="total-question-num">/{questions.length}</span>
+            <h2>{question}</h2>
+            <ul>
+              {choices.map((choice, index) => (
+                <li
+                  key={choice}
+                  onClick={() => onAnswerClick(choice, index)}
+                  className={answerIndex === index ? "selected-answer" : null}
+                >
+                  {choice}
+                </li>
+              ))}
+            </ul>
+            <div className="button-wrapper">
+              <button
+                onClick={() => onClickNext(answer)}
+                disabled={answerIndex === null}
               >
-                {answer}
-              </li>
-            ))}
-          </ul>
-          <div className="button-wrapper">
-            <button onClick={() => onClickNext(answer)} disabled={answerIndex === null}>
-              {currentQuestion === question.length - 1 ? "Finish" : "Next"}
-            </button>
-          </div>
+                {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
+              </button>
+            </div>
         </div>
-      </div>) : <div className="result">
-        <h3>Result</h3>
-        <p>
+      ) : (
+        <div className="result">
+          <h3>Result</h3>
+          <p>
             Total Questions: <span>{questions.length}</span>
-        </p>
-        <p>
-            Total Score: <span>{result.correctAnswers}</span>
-        </p>
-        <p>
+          </p>
+          <p>
+            Total Score: <span>{result.score}</span>
+          </p>
+          <p>
             Correct Answers: <span>{result.correctAnswers}</span>
-        </p>
-        <p>
+          </p>
+          <p>
             Wrong Answers: <span>{result.wrongAnswers}</span>
-        </p>
-        <button onClick={onTryAgain}>Try Again</button>
-        </div>}
-      
+          </p>
+          <button onClick={onTryAgain}>Try Again</button>
+        </div>
+      )}
     </div>
   );
 }
