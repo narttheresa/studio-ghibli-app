@@ -10,6 +10,22 @@
     opacity: 0.9;
 }
 
+.navbar .scroll-to-top {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+  }
+
+  .navbar .scroll-to-top .fa-arrow-up {
+    color: white;
+  }
+
+.navbar p {
+    font-size: 10px;
+    left: 0;
+    color: white;
+}
 
 .navbar ul {
     list-style: none;
