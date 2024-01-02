@@ -1,8 +1,7 @@
 
 .quiz-wrapper {
     font-family: monospace;
-    background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671) );
-    color: black;
+    background-image: url(../Assets/ghibli-gif.gif);
     display: flex;
     justify-content: center;
     margin: 0 auto;
@@ -14,8 +13,8 @@
 .quiz-container {
     width: 700px;
     height: 550px;
-    background: white;
-    border-radius: 5px;
+    background-image: linear-gradient(to bottom, rgba(119, 83, 45, 0.77), rgba(150, 141, 135, 0.708));
+    border-radius: 15px;
     box-sizing: border-box;
     margin-top: 100px;
     padding: 30px 50px;
@@ -23,8 +22,10 @@
 }
 
 .quiz-container h2 {
-    font-size: 25px;
+    font-size: 30px;
     margin: 0;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
 }
 .active-question-num {
     font-size: 30px;
@@ -47,7 +48,7 @@
 .quiz-container li {
     list-style: none;
     font-size: 18px;
-    color: rgb(94, 91, 91);
+    color: rgb(47, 46, 46);
     background: rgb(217, 228, 232);
     border: 1px solid lightgray;
     border-radius: 16px;
@@ -58,9 +59,10 @@
 
 
 .quiz-container .selected-answer {
-    background: rgb(207, 157, 218);
-    border: 1px solid rgb(0, 251, 255);
-    color: aliceblue;
+    background: rgb(218, 201, 157);
+    border: 1px solid rgb(221, 222, 143);
+    color: rgb(23, 85, 209);
+    font-weight: bolder;
 }
 
 
@@ -74,7 +76,7 @@
 .button-wrapper button {
    width: 100px;
    height: 30px;
-   background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671) ); 
+   background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671) );  
    border-radius: 10px;
    font-size: 20px;
    color: white;
@@ -92,34 +94,36 @@
 .quiz-wrapper .result {
     width: 700px;
     height: 550px;
-    background: white;
-    border-radius: 5px;
+    background: linear-gradient(0deg, rgba(116, 114, 111, 0.867), rgba(164, 111, 14, 0.736) ); 
+    border-radius: 15px;
     box-sizing: border-box;
     margin-top: 100px;
     padding: 30px 50px;
 }
 
+
 .result h3 {
-    font-size: 40px;
+    font-size: 45px;
     font-family: 'Shadows Into Light', cursive;
     text-align: center;
     letter-spacing: 1.5px;
     margin-bottom: 40px;
+    color: white;
 }
 
 .result p {
-    font-size: 20px;
+    font-size: 22px;
     text-align: center;
     padding: 10px;
 }
 
 .result span {
-    color:rgb(2, 2, 133);
+    color:rgb(8, 8, 98);
     font-weight: bolder;
 }
 
 .result button {
-    width: 100px;
+    width: 130px;
     height: 30px;
     background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671) ); 
     border-radius: 10px;
@@ -129,7 +133,7 @@
     margin-top: 50px;
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
