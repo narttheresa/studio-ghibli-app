@@ -72,7 +72,6 @@ h2 {
 .film-card {
     background-image: linear-gradient(to bottom, rgb(51, 121, 162), rgb(145, 163, 173));
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 450px;
     text-align: center;

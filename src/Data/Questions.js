@@ -1,4 +1,4 @@
-export const jsQuizz ={
+export const jsQuiz ={
   questions: [
       {
         id: 1,

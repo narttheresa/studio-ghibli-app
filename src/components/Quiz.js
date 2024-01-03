@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../Styles/Quiz.css";
 import { resultInitialState } from "../Data/Questions";
 import QuizTimer from "./QuizTimer";
+import ResultQuiz from "./ResultQuiz";
+
 
 function Quiz({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -19,7 +21,7 @@ function Quiz({ questions }) {
       setAnswer(true);
     } else {
       setAnswer(false);
-    }
+    } 
   }
 
   function onClickNext(finalAnswer) {
@@ -65,7 +67,7 @@ function Quiz({ questions }) {
         <div className="quiz-container">
           
             {showQuizTimer && (
-              <QuizTimer duration={10} onTimeUp={handleTimeUp} />
+              <QuizTimer duration={15} onTimeUp={handleTimeUp} />
             )}
             <span className="active-question-num">{currentQuestion + 1}</span>
             <span className="total-question-num">/{questions.length}</span>
@@ -91,22 +93,7 @@ function Quiz({ questions }) {
             </div>
         </div>
       ) : (
-        <div className="result">
-          <h3>Result</h3>
-          <p>
-            Total Questions: <span>{questions.length}</span>
-          </p>
-          <p>
-            Total Score: <span>{result.score}</span>
-          </p>
-          <p>
-            Correct Answers: <span>{result.correctAnswers}</span>
-          </p>
-          <p>
-            Wrong Answers: <span>{result.wrongAnswers}</span>
-          </p>
-          <button onClick={onTryAgain}>Try Again</button>
-        </div>
+       <ResultQuiz result={result} onTryAgain={onTryAgain} totalQuestions={questions.length}/>
       )}
     </div>
   );

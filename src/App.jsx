@@ -6,9 +6,10 @@ import FilmList from "./components/FilmList";
 import CharacterList from "./components/CharacterList";
 import FavouriteList from "./components/FavouriteList";
 import Quiz from "./components/Quiz";
-import { jsQuizz } from "./Data/Questions";
+import { jsQuiz } from "./Data/Questions";
 
 function App() {
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +21,7 @@ function App() {
             <Route path="/films" element={<FilmList />} />
             <Route path="/people" element={<CharacterList />} />
             <Route path="/favourites" element={<FavouriteList />} />
-            <Route path="/quiz" element={<Quiz questions={jsQuizz.questions} />} />
+            <Route path="/quiz" element={<Quiz questions={jsQuiz.questions} />} />
           </Routes>
         </BrowserRouter>
       </header>
