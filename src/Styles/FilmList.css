@@ -76,6 +76,7 @@ h2 {
     width: 450px;
     text-align: center;
     opacity: 0.8;
+    color: rgb(0, 0, 0);
 }
 
 
@@ -89,11 +90,12 @@ h2 {
 .film-card h3 {
     font-family: 'Shadows Into Light', cursive;
     padding: 10px;
-    font-size: 25px;
+    font-size: 28px;
 }
 
 .film-card .description {
     text-align: justify;
+    color: white;
 }
 
 .film-card p {

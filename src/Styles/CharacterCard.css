@@ -35,4 +35,9 @@
 
 .character-card p {
     padding: 5px;
+    color: aliceblue;
+}
+
+.character-card li {
+    color: aliceblue;
 }
