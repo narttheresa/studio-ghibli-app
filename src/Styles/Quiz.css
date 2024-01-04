@@ -92,10 +92,14 @@
 }
 
 
+.result {
+    position: relative;
+}
+
 .quiz-wrapper .result {
     width: 700px;
     height: 550px;
-    background: linear-gradient(0deg, rgba(116, 114, 111, 0.867), rgba(164, 111, 14, 0.736) ); 
+    background-image: linear-gradient(to bottom, rgba(119, 83, 45, 0.77), rgba(150, 141, 135, 0.708));
     border-radius: 15px;
     box-sizing: border-box;
     margin-top: 100px;
@@ -131,10 +135,6 @@
     font-size: 20px;
     color: white;
     border: none;
-    margin-top: 50px;
     cursor: pointer;
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(180%, 70%);
 }

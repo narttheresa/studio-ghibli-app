@@ -3,6 +3,7 @@ import "../Styles/Quiz.css";
 import { resultInitialState } from "../Data/Questions";
 import QuizTimer from "./QuizTimer";
 import ResultQuiz from "./ResultQuiz";
+import WelcomeQuiz from "./WelcomeQuiz";
 
 
 function Quiz({ questions }) {
@@ -12,8 +13,13 @@ function Quiz({ questions }) {
   const [result, setResult] = useState(resultInitialState);
   const [showResult, setShowResult] = useState(false);
   const [showQuizTimer, setShowQuizTimer] = useState(true);
+  const [quizStart, setQuizStart] = useState(false);
 
   const { question, choices, correctAnswer } = questions[currentQuestion];
+
+  function startQuiz() {
+    setQuizStart(true);
+  }
 
   function onAnswerClick(answer, index) {
     setAnswerIndex(index);
@@ -63,37 +69,33 @@ function Quiz({ questions }) {
 
   return (
     <div className="quiz-wrapper">
-      {!showResult ? (
+      {!quizStart ? (
+        <WelcomeQuiz onStartQuiz={startQuiz} />
+      ) : !showResult ? (
         <div className="quiz-container">
-          
-            {showQuizTimer && (
-              <QuizTimer duration={15} onTimeUp={handleTimeUp} />
-            )}
-            <span className="active-question-num">{currentQuestion + 1}</span>
-            <span className="total-question-num">/{questions.length}</span>
-            <h2>{question}</h2>
-            <ul>
-              {choices.map((choice, index) => (
-                <li
-                  key={choice}
-                  onClick={() => onAnswerClick(choice, index)}
-                  className={answerIndex === index ? "selected-answer" : null}
-                >
-                  {choice}
-                </li>
-              ))}
-            </ul>
-            <div className="button-wrapper">
-              <button
-                onClick={() => onClickNext(answer)}
-                disabled={answerIndex === null}
+          {showQuizTimer && <QuizTimer duration={15} onTimeUp={handleTimeUp} />}
+          <span className="active-question-num">{currentQuestion + 1}</span>
+          <span className="total-question-num">/{questions.length}</span>
+          <h2>{question}</h2>
+          <ul>
+            {choices.map((choice, index) => (
+              <li
+                key={choice}
+                onClick={() => onAnswerClick(choice, index)}
+                className={answerIndex === index ? "selected-answer" : null}
               >
-                {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
-            </div>
+                {choice}
+              </li>
+            ))}
+          </ul>
+          <div className="button-wrapper">
+            <button onClick={() => onClickNext(answer)} disabled={answerIndex === null}>
+              {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
+            </button>
+          </div>
         </div>
       ) : (
-       <ResultQuiz result={result} onTryAgain={onTryAgain} totalQuestions={questions.length}/>
+        <ResultQuiz result={result} onTryAgain={onTryAgain} totalQuestions={questions.length} />
       )}
     </div>
   );
