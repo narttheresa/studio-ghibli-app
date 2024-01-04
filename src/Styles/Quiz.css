@@ -33,11 +33,14 @@
 .welcome-quiz h1 {
     font-family: 'Shadows Into Light', cursive;
     font-size: 50px;
+    color: white;
+    font-weight: 600;
 }
 
 .welcome-quiz p {
     font-size: 20px;
     margin-top: 15px;
+    color: white;
 }
 
 .welcome-quiz button {
