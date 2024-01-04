@@ -4,7 +4,7 @@ import { resultInitialState } from "../Data/Questions";
 import QuizTimer from "./QuizTimer";
 import ResultQuiz from "./ResultQuiz";
 import WelcomeQuiz from "./WelcomeQuiz";
-
+import gif from "../Assets/ghibli-gif.gif";
 
 function Quiz({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -27,7 +27,7 @@ function Quiz({ questions }) {
       setAnswer(true);
     } else {
       setAnswer(false);
-    } 
+    }
   }
 
   function onClickNext(finalAnswer) {
@@ -53,8 +53,8 @@ function Quiz({ questions }) {
     }
 
     setTimeout(() => {
-        setShowQuizTimer(true);
-    })
+      setShowQuizTimer(true);
+    });
   }
 
   function onTryAgain() {
@@ -69,34 +69,46 @@ function Quiz({ questions }) {
 
   return (
     <div className="quiz-wrapper">
-      {!quizStart ? (
-        <WelcomeQuiz onStartQuiz={startQuiz} />
-      ) : !showResult ? (
-        <div className="quiz-container">
-          {showQuizTimer && <QuizTimer duration={15} onTimeUp={handleTimeUp} />}
-          <span className="active-question-num">{currentQuestion + 1}</span>
-          <span className="total-question-num">/{questions.length}</span>
-          <h2>{question}</h2>
-          <ul>
-            {choices.map((choice, index) => (
-              <li
-                key={choice}
-                onClick={() => onAnswerClick(choice, index)}
-                className={answerIndex === index ? "selected-answer" : null}
+      <div className="bg-img">
+        <img src={gif} alt="Ghibli GIF" />
+        {!quizStart ? (
+          <WelcomeQuiz onStartQuiz={startQuiz} />
+        ) : !showResult ? (
+          <div className="quiz-container">
+            {showQuizTimer && (
+              <QuizTimer duration={15} onTimeUp={handleTimeUp} />
+            )}
+            <span className="active-question-num">{currentQuestion + 1}</span>
+            <span className="total-question-num">/{questions.length}</span>
+            <h2>{question}</h2>
+            <ul>
+              {choices.map((choice, index) => (
+                <li
+                  key={choice}
+                  onClick={() => onAnswerClick(choice, index)}
+                  className={answerIndex === index ? "selected-answer" : null}
+                >
+                  {choice}
+                </li>
+              ))}
+            </ul>
+            <div className="button-wrapper">
+              <button
+                onClick={() => onClickNext(answer)}
+                disabled={answerIndex === null}
               >
-                {choice}
-              </li>
-            ))}
-          </ul>
-          <div className="button-wrapper">
-            <button onClick={() => onClickNext(answer)} disabled={answerIndex === null}>
-              {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
-            </button>
+                {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
+              </button>
+            </div>
           </div>
-        </div>
-      ) : (
-        <ResultQuiz result={result} onTryAgain={onTryAgain} totalQuestions={questions.length} />
-      )}
+        ) : (
+          <ResultQuiz
+            result={result}
+            onTryAgain={onTryAgain}
+            totalQuestions={questions.length}
+          />
+        )}
+      </div>
     </div>
   );
 }

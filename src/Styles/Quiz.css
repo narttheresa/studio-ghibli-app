@@ -1,11 +1,64 @@
+.bg-img {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.bg-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+
+.welcome-quiz {
+    width: 700px;
+    height: 300px;
+    background-image: linear-gradient(to bottom, rgba(119, 83, 45, 0.77), rgba(150, 141, 135, 0.708));
+    border-radius: 15px;
+    box-sizing: border-box;
+    margin: auto;
+    margin-top: 200px;
+    padding: 55px 0;
+    position: relative;
+    text-align: center;
+    
+}
+
+.welcome-quiz h1 {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 50px;
+}
+
+.welcome-quiz p {
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.welcome-quiz button {
+    width: 100px;
+    height: 30px;
+    background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671));
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
 
 .quiz-wrapper {
     font-family: monospace;
-    background-image: url(../Assets/ghibli-gif.gif);
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    padding: 0 25px;
+    padding: 0;
     height: 100vh;
 }
 
@@ -16,9 +69,10 @@
     background-image: linear-gradient(to bottom, rgba(119, 83, 45, 0.77), rgba(150, 141, 135, 0.708));
     border-radius: 15px;
     box-sizing: border-box;
-    margin-top: 100px;
     padding: 30px 50px;
     position: relative;
+    margin: auto;
+    margin-top: 50px;
 }
 
 
@@ -28,6 +82,7 @@
     color: rgb(255, 255, 255);
     font-weight: 500;
 }
+
 .active-question-num {
     font-size: 30px;
     font-weight: 600;
@@ -75,15 +130,15 @@
 }
 
 .button-wrapper button {
-   width: 100px;
-   height: 30px;
-   background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671) );  
-   border-radius: 10px;
-   font-size: 20px;
-   color: white;
-   border: none;
-   margin-top: 20px;
-   cursor: pointer;
+    width: 100px;
+    height: 30px;
+    background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671));
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
 .button-wrapper button:disabled {
@@ -94,6 +149,7 @@
 
 .result {
     position: relative;
+    margin: auto;
 }
 
 .quiz-wrapper .result {
@@ -102,7 +158,7 @@
     background-image: linear-gradient(to bottom, rgba(119, 83, 45, 0.77), rgba(150, 141, 135, 0.708));
     border-radius: 15px;
     box-sizing: border-box;
-    margin-top: 100px;
+    margin-top: 50px;
     padding: 30px 50px;
 }
 
@@ -123,14 +179,14 @@
 }
 
 .result span {
-    color:rgb(8, 8, 98);
+    color: rgb(8, 8, 98);
     font-weight: bolder;
 }
 
 .result button {
     width: 130px;
     height: 30px;
-    background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671) ); 
+    background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671));
     border-radius: 10px;
     font-size: 20px;
     color: white;
