@@ -64,3 +64,18 @@ body {
 .film-card small {
     font-weight: 700;
 }
+
+.favourite-film-card button {
+    background: linear-gradient(0deg, rgba(0, 98, 255, 0.817), rgba(132, 183, 245, 0.671));
+    border-radius: 8px;
+    font-size: 15 px;
+    color: white;
+    border: none;
+    margin: 10px 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.favourite-film-card button:hover {
+    background-color: blue;
+}
