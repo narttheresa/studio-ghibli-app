@@ -7,7 +7,7 @@
 }
  
 .character-list-wrapper  {
-    background-image: url(../Assets/ghibli-bg.jpg);
+    background-image: url(../Assets/ghibli-background.jpg);
     background-size: auto;
     image-rendering: -webkit-optimize-contrast;
 }

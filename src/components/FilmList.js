@@ -163,7 +163,7 @@ function FilmList() {
           <option value="ratings">Ratings</option>
           <option value="runningTime">Running Time</option>
         </select>
-        <div>
+        <div className="label-wrapper">
           <label>
             <input
               type="radio"
@@ -225,10 +225,6 @@ function FilmList() {
           </div>
         ))}
       </div>
-      <FavouriteList
-        favouriteFilms={favouriteFilms}
-        setFavouriteFilms={setFavouriteFilms}
-      />
     </div>
   );
 }
