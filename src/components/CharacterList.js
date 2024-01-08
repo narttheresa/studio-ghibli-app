@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CharacterCard from "./CharacterCard";
-import axios from "axios";
 import "../Styles/CharacterList.css";
 import "../Styles/CharacterCard.css";
 

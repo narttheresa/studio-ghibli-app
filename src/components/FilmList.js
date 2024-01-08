@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { fetchFilms } from "../Api";
 import "../Styles/FilmList.css";
-import FavouriteList from "./FavouriteList";
+import FilmCard from "./FilmCard";
+import SortOptions from "./SortOptions";
 
 function FilmList() {
   const [films, setFilms] = useState([]);
@@ -9,8 +10,9 @@ function FilmList() {
   const [isAscending, setIsAscending] = useState(true);
   const [favouriteFilms, setFavouriteFilms] = useState([]);
   const [addedToFavourites, setAddedToFavourites] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const addFilmToFavourites = (film) => {
+  const handleAddToFavourites = (film) => {
     setFavouriteFilms([...favouriteFilms, film]);
     setAddedToFavourites({ ...addedToFavourites, [film.id]: true });
 
@@ -30,9 +32,9 @@ function FilmList() {
         img: film.image,
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error(`HTTP error! Status: ${resp.status}`);
         }
       })
       .catch((error) => {
@@ -43,7 +45,7 @@ function FilmList() {
   // Fetch film data when the component mounts
   useEffect(() => {
     fetchFilms()
-      .then((response) => response.data)
+      .then((resp) => resp.data)
       .then((data) => {
         setFilms(data);
       })
@@ -53,7 +55,7 @@ function FilmList() {
   }, []);
 
   // Function to remove a film from favorites
-  const deleteFilmFromFavourites = (filmId) => {
+  const handleDeleteFromFavourites = (filmId) => {
     setFavouriteFilms(favouriteFilms.filter((film) => film.id !== filmId));
     setAddedToFavourites({ ...addedToFavourites, [filmId]: false });
 
@@ -61,9 +63,9 @@ function FilmList() {
     fetch(`https://studio-ghibli-xt0j.onrender.com/favourites/${filmId}`, {
       method: "DELETE",
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+      .then((resp) => {
+        if (!resp.ok) {
+          throw new Error(`HTTP error! Status: ${resp.status}`);
         }
       })
       .catch((error) => {
@@ -74,7 +76,7 @@ function FilmList() {
   // Fetch the film data again when the component mounts
   useEffect(() => {
     fetchFilms()
-      .then((response) => response.data)
+      .then((resp) => resp.data)
       .then((data) => {
         setFilms(data);
       })
@@ -82,31 +84,6 @@ function FilmList() {
         console.error("Error fetching films:", error);
       });
   }, []);
-
-  function starRating(rt_score) {
-    const fullStars = Math.floor(rt_score / 20);
-    const halfStars = rt_score % 20 >= 10 ? 1 : 0;
-    const emptyStars = 5 - fullStars - halfStars;
-
-    const stars = [];
-
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<span key={i}>&#9733;</span>);
-    }
-
-    if (halfStars) {
-      stars.push(
-        <span key="half" style={{ width: "10px" }}>
-          &#9733;
-        </span>
-      );
-    }
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(<span key={`empty-${i}`}>&#9734;</span>);
-    }
-
-    return stars;
-  }
 
   useEffect(() => {
     sortFilms();
@@ -151,78 +128,51 @@ function FilmList() {
   function handleSortChange(e) {
     setSortOption(e.target.value);
   }
+
+  function filterFilms() {
+    return films.filter((film) =>
+      film.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+
+  // Render only the filtered films
+  const renderedFilms = filterFilms();
+
+  function handleSearchInputChange(e) {
+    setSearchQuery(e.target.value);
+  }
+
+  function handleClearSearch() {
+    setSearchQuery("");
+  }
+  
   return (
     <div className="main-container">
       <h2>Studio Ghibli Films</h2>
-      <div className="sort-wrapper">
-        <label htmlFor="sortOption">Sort by:</label>
-        <select id="sortOption" value={sortOption} onChange={handleSortChange}>
-          <option value="">Select an option</option>
-          <option value="title">Title</option>
-          <option value="year">Year</option>
-          <option value="ratings">Ratings</option>
-          <option value="runningTime">Running Time</option>
-        </select>
-        <div className="label-wrapper">
-          <label>
-            <input
-              type="radio"
-              name="order"
-              value="ascending"
-              checked={isAscending}
-              onChange={() => setIsAscending(true)}
-            />
-            Ascending
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="order"
-              value="descending"
-              checked={!isAscending}
-              onChange={() => setIsAscending(false)}
-            />
-            Descending
-          </label>
-        </div>
+      <div>
+        <input
+          type="text"
+          placeholder="Search films..."
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+        />
+        <button onClick={handleClearSearch}>Clear</button>
       </div>
+      <SortOptions
+        sortOption={sortOption}
+        isAscending={isAscending}
+        onSortChange={handleSortChange}
+        onOrderChange={setIsAscending}
+      />
       <div className="film-container">
-        {films.map((film) => (
-          <div
+        {renderedFilms.map((film) => (
+          <FilmCard
             key={film.id}
-            className={`film-card ${
-              addedToFavourites[film.id] ? "added-to-favourites" : ""
-            }`}
-          >
-            <img src={film.image} alt={film.title} />
-            <h3>{film.title}</h3>
-            <p>Rating: {starRating(film.rt_score)}</p>
-            <small>
-              {film.release_date} | {film.running_time}min
-            </small>
-            <p className="description">{film.description}</p>
-            <button
-              onClick={() => {
-                // Check if the film is already in favorites
-                if (!addedToFavourites[film.id]) {
-                  addFilmToFavourites(film);
-                }
-              }}
-            >
-              {addedToFavourites[film.id]
-                ? "Added to Favourites"
-                : "Add to Favourites"}
-            </button>
-            {addedToFavourites[film.id] && (
-              <button
-                onClick={() => {
-                  deleteFilmFromFavourites(film.id);
-                }}
-              >
-                Remove from Favourites
-              </button>
-            )}
-          </div>
+            film={film}
+            addedToFavourites={addedToFavourites}
+            onAddToFavourites={handleAddToFavourites}
+            onDeleteFromFavourites={handleDeleteFromFavourites}
+          />
         ))}
       </div>
     </div>
