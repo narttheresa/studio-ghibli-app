@@ -24,6 +24,11 @@ body {
     align-items: center;
 }
 
+.favourite-main-container h4 {
+    font-family: monospace;
+    font-size: 20px;
+}
+
 
 .favourite-film-container {
     display: flex;

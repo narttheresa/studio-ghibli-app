@@ -6,20 +6,21 @@ import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const [isSticky, setIsSticky] = useState(false);
+  const scrollThreshold = 40;
 
   useEffect(() => {
     function handleScroll() {
-      setIsSticky(window.scrollY > 40);
+      setIsSticky(window.scrollY > scrollThreshold);
     }
-    window.addEventListener("scroll", handleScroll);
 
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   function handleScrollToTop() {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
 
@@ -35,29 +36,19 @@ function NavBar() {
         </div>
         <ul>
           <li>
-            <NavLink to="/" activeClassName="active">
-              Home
-            </NavLink>
+            <NavLink to="/" >Home </NavLink>
           </li>
           <li>
-            <NavLink to="/films" activeClassName="active">
-              Films
-            </NavLink>
+            <NavLink to="/films" >Films</NavLink>
           </li>
           <li>
-            <NavLink to="/people" activeClassName="active">
-              Characters
-            </NavLink>
+            <NavLink to="/people" >Characters</NavLink>
           </li>
           <li>
-            <NavLink to="/favourites" activeClassName="active">
-              Favourites
-            </NavLink>
+            <NavLink to="/favourites" >Favourites</NavLink>
           </li>
           <li>
-            <NavLink to="/quiz" activeClassName="active">
-              Quiz
-            </NavLink>
+            <NavLink to="/quiz" >Quiz</NavLink>
           </li>
         </ul>
       </nav>

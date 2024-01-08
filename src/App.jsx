@@ -15,7 +15,6 @@ function App() {
       <header className="App-header">
         <BrowserRouter>
           <NavBar />
-
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/films" element={<FilmList />} />
