@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Vina+Sans&display=swap');
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(../Assets/ghibli-bg.jpg);
+    background-size: auto;
+    object-fit: cover;
+}
+
+.favourite-main-container {
+    background-image: url(../Assets/ghibli-bg.jpg);
+    background-size: auto;
+    image-rendering: -webkit-optimize-contrast;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.favourite-film-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.favourite-film-card {
+    background-image: linear-gradient(to bottom, rgb(51, 121, 162), rgb(145, 163, 173));
+    border-radius: 5px;
+    padding: 20px;
+    width: 450px;
+    text-align: center;
+    opacity: 0.8;
+    color: rgb(0, 0, 0);
+}
+
+
+.favourite-film-card img {
+    width: 80%;
+    height: 50%;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
+.favourite-film-card h3 {
+    font-family: 'Shadows Into Light', cursive;
+    padding: 10px;
+    font-size: 28px;
+}
+
+.favourite-film-card p {
+    padding: 10px;
+}
+
+.film-card small {
+    font-weight: 700;
+}

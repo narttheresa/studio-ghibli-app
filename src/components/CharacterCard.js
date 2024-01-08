@@ -8,7 +8,7 @@ const CharacterCard = ({ name, gender, age, films }) => (
   <div className="main-character-container">
     <div className="character-card">
       <h3>{name}</h3>
-      <p><strong>Gender:</strong> {gender}  <strong>Age:</strong> {age}</p>
+      <p><strong>Gender:</strong> {gender} <br/> <strong>Age:</strong> {age}</p>
       <p><strong>Films:</strong></p>
       <ul>
         {films.map((film) => (
