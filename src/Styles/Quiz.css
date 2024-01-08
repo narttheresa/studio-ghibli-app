@@ -44,14 +44,13 @@
 }
 
 .welcome-quiz button {
-    width: 100px;
-    height: 30px;
     background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671));
     border-radius: 10px;
     font-size: 20px;
     color: white;
     border: none;
     margin-top: 30px;
+    padding: 10px 20px;
     cursor: pointer;
 }
 
@@ -133,14 +132,14 @@
 }
 
 .button-wrapper button {
-    width: 100px;
-    height: 30px;
+  
     background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671));
     border-radius: 10px;
     font-size: 20px;
     color: white;
     border: none;
     margin-top: 20px;
+    padding: 10px 20px;
     cursor: pointer;
 }
 
@@ -187,13 +186,12 @@
 }
 
 .result button {
-    width: 130px;
-    height: 30px;
     background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671));
     border-radius: 10px;
     font-size: 20px;
     color: white;
     border: none;
     cursor: pointer;
-    transform: translate(180%, 70%);
+    padding: 10px 15px;
+    transform: translate(220%, 80%);
 }

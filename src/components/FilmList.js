@@ -188,7 +188,12 @@ function FilmList() {
       </div>
       <div className="film-container">
         {films.map((film) => (
-          <div key={film.id} className="film-card">
+          <div
+            key={film.id}
+            className={`film-card ${
+              addedToFavourites[film.id] ? "added-to-favourites" : ""
+            }`}
+          >
             <img src={film.image} alt={film.title} />
             <h3>{film.title}</h3>
             <p>Rating: {starRating(film.rt_score)}</p>
@@ -198,10 +203,15 @@ function FilmList() {
             <p className="description">{film.description}</p>
             <button
               onClick={() => {
-                addFilmToFavourites(film);
+                // Check if the film is already in favorites
+                if (!addedToFavourites[film.id]) {
+                  addFilmToFavourites(film);
+                }
               }}
             >
-              Add to Favourites
+              {addedToFavourites[film.id]
+                ? "Added to Favourites"
+                : "Add to Favourites"}
             </button>
             {addedToFavourites[film.id] && (
               <button
