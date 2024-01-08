@@ -1,6 +1,6 @@
 import React from "react";
 
-function SortOptions({sortOption, isAscending, onSortChange, onOrderChange}) {
+function SelectOptions({sortOption, isAscending, onSortChange, onOrderChange, searchQuery, onSearchChange, onClearSearch }) {
   return (
     <div className="sort-wrapper">
       <label htmlFor="sortOption">Sort by:</label>
@@ -33,8 +33,17 @@ function SortOptions({sortOption, isAscending, onSortChange, onOrderChange}) {
           Descending
         </label>
       </div>
+      <div>
+        <input
+          type="text"
+          placeholder="Search films..."
+          value={searchQuery}
+          onChange={onSearchChange}
+        />
+        <button onClick={onClearSearch}>Clear</button>
+      </div>
     </div>
   );
 }
 
-export default SortOptions;
+export default SelectOptions;

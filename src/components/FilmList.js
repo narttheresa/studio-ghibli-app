@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchFilms } from "../Api";
 import "../Styles/FilmList.css";
 import FilmCard from "./FilmCard";
-import SortOptions from "./SortOptions";
+import SelectOptions from "./SelectOptions";
 
 function FilmList() {
   const [films, setFilms] = useState([]);
@@ -145,24 +145,18 @@ function FilmList() {
   function handleClearSearch() {
     setSearchQuery("");
   }
-  
+
   return (
     <div className="main-container">
       <h2>Studio Ghibli Films</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="Search films..."
-          value={searchQuery}
-          onChange={handleSearchInputChange}
-        />
-        <button onClick={handleClearSearch}>Clear</button>
-      </div>
-      <SortOptions
+      <SelectOptions
         sortOption={sortOption}
         isAscending={isAscending}
         onSortChange={handleSortChange}
         onOrderChange={setIsAscending}
+        searchQuery={searchQuery}
+        onSearchChange={handleSearchInputChange}
+        onClearSearch={handleClearSearch}
       />
       <div className="film-container">
         {renderedFilms.map((film) => (
