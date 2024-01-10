@@ -2,10 +2,10 @@ import React from "react";
 import NavBar from "./components/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./components/MainPage";
-import FilmList from "./components/FilmList";
-import CharacterList from "./components/CharacterList";
+import FilmList from "./components/Films/FilmList";
+import CharacterList from "./components/Characters/CharacterList";
 import FavouriteList from "./components/FavouriteList";
-import Quiz from "./components/Quiz";
+import Quiz from "./components/Quiz/Quiz";
 import { jsQuiz } from "./Data/Questions";
 
 function App() {

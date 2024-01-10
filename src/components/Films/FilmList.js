@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { fetchFilms } from "../Api";
-import "../Styles/FilmList.css";
+import { fetchFilms } from "../../Api";
+import "../../Styles/FilmList.css";
 import FilmCard from "./FilmCard";
 import SelectOptions from "./SelectOptions";
 

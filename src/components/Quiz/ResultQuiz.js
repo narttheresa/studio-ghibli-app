@@ -1,4 +1,4 @@
-import "../Styles/Quiz.css"
+import "../../Styles/Quiz.css"
 
 
 function ResultQuiz({ totalQuestions, result, onTryAgain }) {

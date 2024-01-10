@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "../Styles/Quiz.css";
-import { resultInitialState } from "../Data/Questions";
+import "../../Styles/Quiz.css";
+import { resultInitialState } from "../../Data/Questions";
 import QuizTimer from "./QuizTimer";
 import ResultQuiz from "./ResultQuiz";
 import WelcomeQuiz from "./WelcomeQuiz";
-import gif from "../Assets/ghibli-gif.gif";
+import gif from "../../Assets/ghibli-gif.gif";
 
 function Quiz({ questions }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);

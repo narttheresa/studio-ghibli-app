@@ -1,5 +1,5 @@
 import React from "react";
-import "../Styles/Quiz.css";
+import "../../Styles/Quiz.css";
 
 function WelcomeQuiz({ onStartQuiz }) {
   return (

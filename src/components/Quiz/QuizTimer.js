@@ -1,5 +1,5 @@
 import React from "react";
-import "../Styles/QuizTimer.css";
+import "../../Styles/QuizTimer.css";
 import { useEffect, useState, useRef } from "react";
 
 function QuizTimer({ duration, onTimeUp }) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CharacterCard from "./CharacterCard";
-import "../Styles/CharacterList.css";
-import "../Styles/CharacterCard.css";
+import "../../Styles/CharacterList.css";
+import "../../Styles/CharacterCard.css";
 
 function CharacterList() {
   const [characters, setCharacters] = useState([]);

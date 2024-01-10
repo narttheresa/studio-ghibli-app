@@ -1,6 +1,6 @@
 import React from "react";
-import "../Styles/CharacterCard.css";
-import "../Styles/CharacterList.css";
+import "../../Styles/CharacterCard.css";
+import "../../Styles/CharacterList.css";
 
 // CharacterCard component - create this component to display the character details
 const CharacterCard = ({ name, gender, age, films }) => (

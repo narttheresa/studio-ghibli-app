@@ -27,7 +27,7 @@
     -webkit-appearance: button;
     appearance: button;
     outline: none;
-    cursor: pointer;
+    cursor: text;
 }
 
 .search-bar-wrapper button {
@@ -40,6 +40,9 @@
     cursor: pointer;
 }
 
+.search-bar-wrapper button:hover {
+    background-color: rgb(33, 122, 231);
+}
 
 
 .character-list-wrapper  {
