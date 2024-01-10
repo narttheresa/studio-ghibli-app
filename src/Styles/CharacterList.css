@@ -6,6 +6,42 @@
     padding: 0;
 }
  
+.search-bar-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar-wrapper input {
+    background-color: #6091be64;
+    color: rgb(72, 69, 69);
+    padding: 12px;
+    width: 250px;
+    border-radius: 10px 10px;
+    border: none;
+    font-size: 20px;
+    font-family: monospace;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    cursor: pointer;
+}
+
+.search-bar-wrapper button {
+    background: linear-gradient(0deg, rgba(0, 98, 255, 0.817), rgba(132, 183, 245, 0.671));
+    border-radius: 8px;
+    font-size: 15px;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+
+
 .character-list-wrapper  {
     background-image: url(../Assets/ghibli-background.jpg);
     background-size: auto;

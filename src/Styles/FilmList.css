@@ -30,7 +30,8 @@
     justify-content: center;
     gap: 20px;
     margin-bottom: 20px;
-  }
+    font-family: monospace;
+}
 
 .sort-wrapper label {
     margin-right: 10px;
@@ -48,6 +49,7 @@
     border-radius: 10px 10px;
     border: none;
     font-size: 20px;
+    font-family: monospace;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     -webkit-appearance: button;
     appearance: button;
@@ -63,16 +65,18 @@
 
 .search-wrapper input {
     background-color: #6091be64;
-    color: rgb(72, 69, 69);
+    color: rgb(0, 0, 0);
     margin-bottom: 10px;
     padding: 12px;
     width: 250px;
     border-radius: 10px;
     border: none;
     font-size: 20px;
+    font-family: monospace;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     outline: none;
 }
+
 .search-wrapper button {
     background: linear-gradient(0deg, rgba(0, 98, 255, 0.817), rgba(132, 183, 245, 0.671));
     border-radius: 8px;

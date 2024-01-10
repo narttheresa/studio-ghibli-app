@@ -7,6 +7,7 @@ function CharacterList() {
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +51,18 @@ function CharacterList() {
     fetchData();
   }, []);
 
+  const filteredCharacters = characters.filter((character) =>
+    character.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery("");
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -61,8 +74,17 @@ function CharacterList() {
   return (
     <div className="character-list-wrapper">
       <h2>Studio Ghibli Characters</h2>
+      <div className="search-bar-wrapper">
+        <input 
+          type="text"
+          placeholder="Search characters..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+        <button onClick={handleClearSearch}>Clear</button>
+      </div>
       <div className="character-container">
-        {characters.map((character) => (
+        {filteredCharacters.map((character) => (
           <CharacterCard
             key={character.id}
             name={character.name}

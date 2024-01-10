@@ -11,6 +11,7 @@ function FilmList() {
   const [favouriteFilms, setFavouriteFilms] = useState([]);
   const [addedToFavourites, setAddedToFavourites] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const handleAddToFavourites = (film) => {
     setFavouriteFilms([...favouriteFilms, film]);
@@ -44,13 +45,17 @@ function FilmList() {
 
   // Fetch film data when the component mounts
   useEffect(() => {
+    setLoading(true);
+
     fetchFilms()
       .then((resp) => resp.data)
       .then((data) => {
         setFilms(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching films:", error);
+        setLoading(false);
       });
   }, []);
 
@@ -133,7 +138,7 @@ function FilmList() {
     return films.filter((film) =>
       film.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
-  };
+  }
 
   // Render only the filtered films
   const renderedFilms = filterFilms();
@@ -158,17 +163,21 @@ function FilmList() {
         onSearchChange={handleSearchInputChange}
         onClearSearch={handleClearSearch}
       />
-      <div className="film-container">
-        {renderedFilms.map((film) => (
-          <FilmCard
-            key={film.id}
-            film={film}
-            addedToFavourites={addedToFavourites}
-            onAddToFavourites={handleAddToFavourites}
-            onDeleteFromFavourites={handleDeleteFromFavourites}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="film-container">
+          {renderedFilms.map((film) => (
+            <FilmCard
+              key={film.id}
+              film={film}
+              addedToFavourites={addedToFavourites}
+              onAddToFavourites={handleAddToFavourites}
+              onDeleteFromFavourites={handleDeleteFromFavourites}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
