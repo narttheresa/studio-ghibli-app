@@ -2,24 +2,37 @@
     height: 70px;
     padding: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     background-image: linear-gradient(to bottom right, rgb(35, 83, 131), rgba(100, 86, 83, 0.792));
     font-size: 1.5rem;
-    z-index:999;
-    width: 100%;
-    opacity: 0.9;
+    z-index: 999;
+    width: 110%;
+    position: sticky;
+    top: 0;
 }
+
+/* the navbar icon when collasped */
+
+.menu-icon {
+    display: none;
+    margin-right: 25px;
+}
+
+/* scroll to top arrow icon */
 
 .navbar .scroll-to-top {
     position: absolute;
     top: 15px;
     left: 15px;
     cursor: pointer;
-  }
+}
 
-  .navbar .scroll-to-top .fa-arrow-up {
+.navbar .scroll-to-top .fa-arrow-up {
     color: white;
-  }
+}
+
+/* css styling for navbar text */
 
 .navbar p {
     font-size: 10px;
@@ -51,6 +64,69 @@
 .navbar .active {
     background-color: rgba(75, 123, 147, 0.8);
     border-radius: 5px;
-    
+
 }
 
+/* allow the navbar to scroll with page */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 630px) {
+
+    .navbar {
+        flex-direction: row-reverse;
+        
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        text-align: center;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(35, 83, 131, 0.9);
+        display: none;
+    }
+
+    .navbar.sticky ul {
+        top: 100px;
+        
+    }
+
+    .navbar.mobile-menu-open ul {
+        display: flex;
+    }
+
+    .navbar .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+
+    .navbar ul.mobile-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(35, 83, 131, 0.9);
+    }
+
+    .navbar ul.mobile-menu li {
+        margin: 10px 0;
+    }
+
+    .navbar ul.mobile-menu a {
+        font-size: 1.2rem;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+
+    }
+}

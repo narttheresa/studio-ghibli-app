@@ -8,6 +8,7 @@ import FavouriteList from "./components/FavouriteList";
 import Quiz from "./components/Quiz/Quiz";
 import { jsQuiz } from "./Data/Questions";
 
+
 function App() {
   
   return (

@@ -1,20 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import "../Styles/NavBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faBars } from "@fortawesome/free-solid-svg-icons";
+import "../Styles/NavBar.css";
 
 function NavBar() {
   const [isSticky, setIsSticky] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 630);
   const scrollThreshold = 40;
+  const mobileMenuThreshold = 630;
 
   useEffect(() => {
     function handleScroll() {
       setIsSticky(window.scrollY > scrollThreshold);
     }
 
+    function handleResize() {
+      const newScreenWidth = window.innerWidth;
+      setIsMobileMenuOpen(newScreenWidth > mobileMenuThreshold);
+      setIsSmallScreen(newScreenWidth <= 630);
+    }
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    // Initial check for mobile menu visibility
+    handleResize();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   function handleScrollToTop() {
@@ -24,31 +41,47 @@ function NavBar() {
     });
   }
 
+  function toggleMobileMenu() {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  }
+
   return (
     <div className="body">
-      <nav
-        className="navbar"
-        style={{ position: isSticky ? "fixed" : "relative", top: 0 }}
-      >
+      <nav className={`navbar ${isSticky ? "sticky" : ""}`}>
         <div className="scroll-to-top">
           <FontAwesomeIcon icon={faArrowUp} onClick={handleScrollToTop} />
           <p>Back to top</p>
         </div>
-        <ul>
+        {isSmallScreen && (
+          <div className="menu-icon" onClick={toggleMobileMenu}>
+            <FontAwesomeIcon icon={faBars} />
+          </div>
+        )}
+        <ul className={isMobileMenuOpen ? "mobile-menu" : ""}>
           <li>
-            <NavLink to="/" >Home </NavLink>
+            <NavLink to="/" onClick={toggleMobileMenu}>
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/films" >Films</NavLink>
+            <NavLink to="/films" onClick={toggleMobileMenu}>
+              Films
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/people" >Characters</NavLink>
+            <NavLink to="/people" onClick={toggleMobileMenu}>
+              Characters
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/favourites" >Favourites</NavLink>
+            <NavLink to="/favourites" onClick={toggleMobileMenu}>
+              Favourites
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/quiz" >Quiz</NavLink>
+            <NavLink to="/quiz" onClick={toggleMobileMenu}>
+              Quiz
+            </NavLink>
           </li>
         </ul>
       </nav>

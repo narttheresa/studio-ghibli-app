@@ -84,3 +84,26 @@ body {
 .favourite-film-card button:hover {
     background-color: blue;
 }
+
+@media screen and (max-width: 450px) {
+    .favourite-film-card {
+      width: 100%; /* Make the film card full width for smaller screens */
+    }
+  
+    .favourite-film-card img {
+      width: 80%; /* Make the image inside the film card full width for smaller screens */
+      height: auto; /* Allow the image to scale proportionally */
+    }
+  
+    .favourite-film-card h3 {
+      font-size: 24px; /* Adjust font size for smaller screens */
+    }
+  
+    .favourite-film-card p {
+      padding: 8px; /* Adjust padding for smaller screens */
+    }
+  
+    .favourite-film-card button {
+      width: 100%; /* Make the button inside the film card full width for smaller screens */
+    }
+  }

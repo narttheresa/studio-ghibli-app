@@ -38,3 +38,16 @@
     padding: 5px;
 }
 
+@media screen and (max-width: 450px) {
+    .character-card {
+      width: 100%; /* Make the character card full width for smaller screens */
+    }
+  
+    .character-card h3 {
+      font-size: 24px; /* Adjust font size for smaller screens */
+    }
+  
+    .character-card p {
+      padding: 8px; /* Adjust padding for smaller screens */
+    }
+  }

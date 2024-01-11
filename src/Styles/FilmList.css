@@ -77,6 +77,10 @@
     outline: none;
 }
 
+.search-wrapper input:hover {
+    box-shadow: 0 5px 25px rgba(255, 255, 255, 0.558);
+}
+
 .search-wrapper button {
     background: linear-gradient(0deg, rgba(0, 98, 255, 0.817), rgba(132, 183, 245, 0.671));
     border-radius: 8px;
@@ -169,4 +173,43 @@ h2 {
 .added-to-favourites {
     background-image: linear-gradient(to bottom, rgb(30, 134, 231), rgb(194, 203, 207));
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 450px) {
+  .sort-wrapper label {
+    font-size: 16px; 
+  }
+
+  .sort-wrapper select {
+    width: 80%; 
+  }
+
+  .search-wrapper input {
+    width: 100%; 
+  }
+
+  .search-wrapper button {
+    width: 50%;
+  }
+
+  .film-card {
+    width: 100%; /* Make the film card full width for smaller screens */
+  }
+
+  .film-card img {
+    width: 80%; 
+    height: auto; /* Allow the image to scale proportionally */
+  }
+
+  .film-card h3 {
+    font-size: 24px; 
+  }
+
+  .film-card p {
+    padding: 8px; 
+  }
+
+  .film-card button {
+    width: 60%; 
+  }
 }

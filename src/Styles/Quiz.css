@@ -27,7 +27,7 @@
     padding: 55px 0;
     position: relative;
     text-align: center;
-    
+
 }
 
 .welcome-quiz h1 {
@@ -132,7 +132,7 @@
 }
 
 .button-wrapper button {
-  
+
     background: linear-gradient(0deg, rgba(0, 0, 255, 0.74), rgba(255, 166, 0, 0.671));
     border-radius: 10px;
     font-size: 20px;
@@ -193,5 +193,88 @@
     border: none;
     cursor: pointer;
     padding: 10px 15px;
-    transform: translate(220%, 80%);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+}
+
+
+@media screen and (max-width: 740px) {
+
+    .welcome-quiz,
+    .quiz-container,
+    .result,
+    .quiz-wrapper .result {
+        width: 100%;
+        /* Make the content full width for smaller screens */
+        margin: auto;
+        /* Center the content horizontally */
+        margin-top: 120px;
+        /* Adjust top margin as needed */
+        height: auto;
+
+    }
+
+    .welcome-quiz h1 {
+        font-size: 45px;  
+    }
+
+    .welcome-quiz p {
+        font-size: 15px;    
+    }
+
+    
+    
+    
+    .quiz-container h2 {
+        font-size: 25px;
+        
+    }
+    
+    .active-question-num {
+        font-size: 35px; 
+    }
+    
+    
+    .total-question-num {
+        font-size: 20px;
+    }
+    
+    .quiz-container ul {
+        margin-top: 20px;
+        margin-left: -20px;
+    }
+    
+    .quiz-container li {
+        list-style: none;
+        font-size: 15px;
+        text-align: center;
+    }
+    
+    
+    .button-wrapper button {
+        font-size: 15px;
+    }
+
+    
+    
+    .quiz-wrapper .result {
+        width: 90%;
+        height: auto;
+    }
+    
+    .result button {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 40px auto;
+        display: block;
+        text-align: center;
+    }
+    
+   
+    
+   
+    
 }

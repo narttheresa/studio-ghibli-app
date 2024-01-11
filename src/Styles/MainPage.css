@@ -19,7 +19,6 @@
 }
 
 
-
 .bg-image img {
     position: absolute;
     top: 0;
@@ -56,3 +55,17 @@
     font-family: 'Shadows Into Light', cursive;
     font-size: 80px;
 }
+
+
+@media screen and (max-width: 630px) {
+    .content {
+      font-size: 14px;
+      line-height: 1.5; 
+      
+    }
+  
+    .content h1 {
+      font-size: 35px;
+      padding: 15px 15px; 
+    }
+  }
