@@ -7,7 +7,7 @@
     background-image: linear-gradient(to bottom right, rgb(35, 83, 131), rgba(100, 86, 83, 0.792));
     font-size: 1.5rem;
     z-index: 999;
-    width: 110%;
+    width: 100%;
     position: sticky;
     top: 0;
 }

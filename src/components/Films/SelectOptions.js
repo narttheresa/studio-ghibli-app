@@ -1,5 +1,6 @@
 import React from "react";
 
+//receiving various props for sorting order, search query and clearing search input
 function SelectOptions({
   sortOption,
   isAscending,
@@ -9,10 +10,11 @@ function SelectOptions({
   onSearchChange,
   onClearSearch,
 }) {
+  //props manage the selected value and trigger various functions 
   return (
     <div className="sort-wrapper">
       <label htmlFor="sortOption">Sort by:</label>
-      <select id="sortOption" value={sortOption} onChange={onSortChange}>
+      <select id="sortOption" value={sortOption} onChange={onSortChange}>    
         <option value="">Select an option</option>
         <option value="title">Title</option>
         <option value="year">Year</option>

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { fetchFilms } from "../Api";
 import "../Styles/FavouriteList.css";
 
 function FavouriteList() {
+  //state variable for favourite films
   const [favouriteFilms, setFavouriteFilms] = useState([]);
   
-
+//asynchronous data fetching when component mounts
+//fetch to retrieve a list of favourite films from the specified api endpoint 
   useEffect(() => {
     fetch("https://studio-ghibli-xt0j.onrender.com/favourites")
       .then((resp) => resp.json())
@@ -15,7 +16,7 @@ function FavouriteList() {
       );
   }, []);
 
-
+//removing a film from the list of favourite films
   function handleRemoveFromFavourites(id) {
     fetch(`https://studio-ghibli-xt0j.onrender.com/favourites/${id}`,{
         method: 'DELETE',

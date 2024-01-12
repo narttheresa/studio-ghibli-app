@@ -56,6 +56,7 @@
     font-size: 80px;
 }
 
+/* modifying content size when on mobile devices */
 
 @media screen and (max-width: 630px) {
     .content {

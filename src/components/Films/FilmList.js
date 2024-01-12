@@ -4,6 +4,7 @@ import "../../Styles/FilmList.css";
 import FilmCard from "./FilmCard";
 import SelectOptions from "./SelectOptions";
 
+//managing the states for various aspects of the component
 function FilmList() {
   const [films, setFilms] = useState([]);
   const [sortOption, setSortOption] = useState("");
@@ -13,11 +14,29 @@ function FilmList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const handleAddToFavourites = (film) => {
+  
+  // Fetch film data when the component mounts
+  useEffect(() => {
+    setLoading(true);
+
+    fetchFilms()
+      .then((resp) => resp.data)
+      .then((data) => {
+        setFilms(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching films:", error);
+        setLoading(false);
+      });
+  }, []);
+  
+  //update the favouritefilms state using spread operator- create a new array for fav films 
+  function handleAddToFavourites(film) {
     setFavouriteFilms([...favouriteFilms, film]);
     setAddedToFavourites({ ...addedToFavourites, [film.id]: true });
 
-    // Send a POST request to add the film to favorites on the server
+    // Send a POST request to add the film to favourites on the server
     fetch("https://studio-ghibli-xt0j.onrender.com/favourites", {
       method: "POST",
       headers: {
@@ -43,24 +62,9 @@ function FilmList() {
       });
   };
 
-  // Fetch film data when the component mounts
-  useEffect(() => {
-    setLoading(true);
-
-    fetchFilms()
-      .then((resp) => resp.data)
-      .then((data) => {
-        setFilms(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching films:", error);
-        setLoading(false);
-      });
-  }, []);
-
-  // Function to remove a film from favorites
-  const handleDeleteFromFavourites = (filmId) => {
+  
+  // Function to remove a film from favourites
+  function handleDeleteFromFavourites(filmId) {
     setFavouriteFilms(favouriteFilms.filter((film) => film.id !== filmId));
     setAddedToFavourites({ ...addedToFavourites, [filmId]: false });
 
@@ -90,17 +94,20 @@ function FilmList() {
       });
   }, []);
 
+
+//monitors changes in sortoption, isascending triggering func to update films state
   useEffect(() => {
     sortFilms();
   }, [sortOption, isAscending]);
 
+
   function sortFilms() {
-    let sortedFilms = [...films];
-    switch (sortOption) {
+    let sortedFilms = [...films];  //create a copy of original array
+    switch (sortOption) {             //using switch statement to determine sorting criteria based on the sortoption value
       case "title":
-        sortedFilms.sort((a, b) =>
+        sortedFilms.sort((a, b) =>         //sort method applied to sortfilms
           isAscending
-            ? a.title.localeCompare(b.title)
+            ? a.title.localeCompare(b.title)   //localecompare a comparison func considers both sorting criteria and isascending state to determine order
             : b.title.localeCompare(a.title)
         );
         break;
@@ -127,13 +134,15 @@ function FilmList() {
         break;
     }
 
-    setFilms(sortedFilms);
+    setFilms(sortedFilms);       //updates the films state with the sorted array causing a re-render to display in new order
   }
 
+  //handles changes in the selected sorting option, updates the state with the new value- triggers re-render
   function handleSortChange(e) {
     setSortOption(e.target.value);
   }
 
+  //filters the film based on searchquery-return a new array containing the filtered films
   function filterFilms() {
     return films.filter((film) =>
       film.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -143,10 +152,11 @@ function FilmList() {
   // Render only the filtered films
   const renderedFilms = filterFilms();
 
+  //updates the searchquery state with the new value from the input field triggering re-render 
   function handleSearchInputChange(e) {
     setSearchQuery(e.target.value);
   }
-
+//sets the searchquery state to empty string- clear search results 
   function handleClearSearch() {
     setSearchQuery("");
   }
@@ -154,7 +164,7 @@ function FilmList() {
   return (
     <div className="main-container">
       <h2>Studio Ghibli Films</h2>
-      <SelectOptions
+      <SelectOptions                   //sorting component receiving props for state management and event handling
         sortOption={sortOption}
         isAscending={isAscending}
         onSortChange={handleSortChange}
@@ -163,12 +173,12 @@ function FilmList() {
         onSearchChange={handleSearchInputChange}
         onClearSearch={handleClearSearch}
       />
-      {loading ? (
+      {loading ? (         //conditional rendering when or not to display loading message 
         <p>Loading...</p>
       ) : (
         <div className="film-container">
           {renderedFilms.map((film) => (
-            <FilmCard
+            <FilmCard       //film card component for each film displayed- receives props for state management 
               key={film.id}
               film={film}
               addedToFavourites={addedToFavourites}

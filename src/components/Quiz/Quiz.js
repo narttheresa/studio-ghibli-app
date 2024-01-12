@@ -7,20 +7,23 @@ import WelcomeQuiz from "./WelcomeQuiz";
 import gif from "../../Assets/ghibli-gif.gif";
 
 function Quiz({ questions }) {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answerIndex, setAnswerIndex] = useState(null);
-  const [answer, setAnswer] = useState(null);
-  const [result, setResult] = useState(resultInitialState);
-  const [showResult, setShowResult] = useState(false);
-  const [showQuizTimer, setShowQuizTimer] = useState(true);
-  const [quizStart, setQuizStart] = useState(false);
+  //state variables for managing quiz state 
+  const [currentQuestion, setCurrentQuestion] = useState(0);    //current Q
+  const [answerIndex, setAnswerIndex] = useState(null);         //selected A
+  const [answer, setAnswer] = useState(null);                    //whether selected A is correct-boolean value
+  const [result, setResult] = useState(resultInitialState);     //tracks the quiz result
+  const [showResult, setShowResult] = useState(false);          //when to display the result or not
+  const [showQuizTimer, setShowQuizTimer] = useState(true);     //control visibility of the quiz timer
+  const [quizStart, setQuizStart] = useState(false);            //whether the quiz started or not
 
   const { question, choices, correctAnswer } = questions[currentQuestion];
 
+  //to start the quiz set it to true
   function startQuiz() {
     setQuizStart(true);
   }
 
+  //function to handle user's selected answer choice
   function onAnswerClick(answer, index) {
     setAnswerIndex(index);
     if (answer === correctAnswer) {
@@ -30,6 +33,7 @@ function Quiz({ questions }) {
     }
   }
 
+  //function to handle the "next" button click, updates the results and moves to the next Q
   function onClickNext(finalAnswer) {
     setAnswerIndex(null);
     setShowQuizTimer(false);
@@ -57,11 +61,13 @@ function Quiz({ questions }) {
     });
   }
 
+//function to handle show result state
   function onTryAgain() {
     setResult(resultInitialState);
     setShowResult(false);
   }
 
+ //function to handle time-up event 
   function handleTimeUp() {
     setAnswer(false);
     onClickNext(false);

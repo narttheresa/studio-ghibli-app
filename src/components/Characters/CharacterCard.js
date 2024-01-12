@@ -3,6 +3,7 @@ import "../../Styles/CharacterCard.css";
 import "../../Styles/CharacterList.css";
 
 // CharacterCard component - create this component to display the character details
+//passing props from the charactercard comp
 const CharacterCard = ({ name, gender, age, films }) => (
   
   <div className="main-character-container">

@@ -1,6 +1,9 @@
 import React from "react";
 import "../../Styles/Quiz.css";
 
+
+//welcome page for the quiz
+
 function WelcomeQuiz({ onStartQuiz }) {
   return (
     <div>

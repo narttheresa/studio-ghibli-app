@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilmCard({
+function FilmCard({   //props passed through from filmlist comp
   film,
   addedToFavourites,
   onAddToFavourites,
@@ -9,12 +9,15 @@ function FilmCard({
 
 
   function starRating(rt_score) {
-    const fullStars = Math.floor(rt_score / 20);
-    const halfStars = rt_score % 20 >= 10 ? 1 : 0;
+    const fullStars = Math.floor(rt_score / 20);        //each star represents 20 points
+    const halfStars = rt_score % 20 >= 10 ? 1 : 0;      //if remainder after dividing by 20 is >10 
     const emptyStars = 5 - fullStars - halfStars;
 
-    const stars = [];
+    const stars = [];       //empty array to store star elements
 
+// loops for full stars and appends a full star to the star array 
+//conditional statement: if halfstar is 1 it appends a halfstar icon with a smaller width
+//loops for empty stars
     for (let i = 0; i < fullStars; i++) {
       stars.push(<span key={i}>&#9733;</span>);
     }
@@ -32,9 +35,10 @@ function FilmCard({
 
     return stars;
   }
-
+//conditional classname if the film is in favouriteslist container or not
+//conditional displays either add/remove to favourites based on the film's favourite status- triggers the listed functions when clicked
   return (
-    <div className={`film-card ${addedToFavourites[film.id] ? "added-to-favourites" : ""}`}>
+    <div className={`film-card ${addedToFavourites[film.id] ? "added-to-favourites" : ""}`}>   
       <img src={film.image} alt={film.title} />
       <h3>{film.title}</h3>
       <p>Rating: {starRating(film.rt_score)}</p>
