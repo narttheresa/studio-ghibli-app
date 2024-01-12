@@ -17,18 +17,25 @@ function FilmList() {
   
   // Fetch film data when the component mounts
   useEffect(() => {
+    let isMounted = true;
     setLoading(true);
 
     fetchFilms()
       .then((resp) => resp.data)
       .then((data) => {
-        setFilms(data);
+        if (isMounted) {
+          setFilms(data);
         setLoading(false);
+        }
+        
       })
       .catch((error) => {
         console.error("Error fetching films:", error);
         setLoading(false);
       });
+      return () => {
+    isMounted = false;
+  };
   }, []);
   
   //update the favouritefilms state using spread operator- create a new array for fav films 
@@ -82,6 +89,48 @@ function FilmList() {
       });
   };
 
+
+
+//monitors changes in sortoption, isascending triggering func to update films state
+  useEffect(() => {
+     function sortFilms() {
+      let sortedFilms = [...films];  //create a copy of original array
+      switch (sortOption) {             //using switch statement to determine sorting criteria based on the sortoption value
+        case "title":
+          sortedFilms.sort((a, b) =>         //sort method applied to sortfilms
+            isAscending
+              ? a.title.localeCompare(b.title)   //localecompare a comparison func considers both sorting criteria and isascending state to determine order
+              : b.title.localeCompare(a.title)
+          );
+          break;
+        case "year":
+          sortedFilms.sort((a, b) =>
+            isAscending
+              ? a.release_date.localeCompare(b.release_date)
+              : b.release_date.localeCompare(a.release_date)
+          );
+          break;
+        case "ratings":
+          sortedFilms.sort((a, b) =>
+            isAscending ? a.rt_score - b.rt_score : b.rt_score - a.rt_score
+          );
+          break;
+        case "runningTime":
+          sortedFilms.sort((a, b) =>
+            isAscending
+              ? a.running_time - b.running_time
+              : b.running_time - a.running_time
+          );
+          break;
+        default:
+          break;
+      }
+
+        setFilms(sortedFilms);       //updates the films state with the sorted array causing a re-render to display in new order
+      }
+        sortFilms();
+      }, [films,sortOption, isAscending]);
+
   // Fetch the film data again when the component mounts
   useEffect(() => {
     fetchFilms()
@@ -92,50 +141,8 @@ function FilmList() {
       .catch((error) => {
         console.error("Error fetching films:", error);
       });
-  }, []);
-
-
-//monitors changes in sortoption, isascending triggering func to update films state
-  useEffect(() => {
-    sortFilms();
-  }, [sortOption, isAscending]);
-
-
-  function sortFilms() {
-    let sortedFilms = [...films];  //create a copy of original array
-    switch (sortOption) {             //using switch statement to determine sorting criteria based on the sortoption value
-      case "title":
-        sortedFilms.sort((a, b) =>         //sort method applied to sortfilms
-          isAscending
-            ? a.title.localeCompare(b.title)   //localecompare a comparison func considers both sorting criteria and isascending state to determine order
-            : b.title.localeCompare(a.title)
-        );
-        break;
-      case "year":
-        sortedFilms.sort((a, b) =>
-          isAscending
-            ? a.release_date.localeCompare(b.release_date)
-            : b.release_date.localeCompare(a.release_date)
-        );
-        break;
-      case "ratings":
-        sortedFilms.sort((a, b) =>
-          isAscending ? a.rt_score - b.rt_score : b.rt_score - a.rt_score
-        );
-        break;
-      case "runningTime":
-        sortedFilms.sort((a, b) =>
-          isAscending
-            ? a.running_time - b.running_time
-            : b.running_time - a.running_time
-        );
-        break;
-      default:
-        break;
-    }
-
-    setFilms(sortedFilms);       //updates the films state with the sorted array causing a re-render to display in new order
-  }
+  }, [sortOption]);
+ 
 
   //handles changes in the selected sorting option, updates the state with the new value- triggers re-render
   function handleSortChange(e) {

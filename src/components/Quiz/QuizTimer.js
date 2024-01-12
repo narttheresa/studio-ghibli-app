@@ -1,6 +1,6 @@
 import React from "react";
 import "../../Styles/QuizTimer.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 
 function QuizTimer({ duration, onTimeUp }) {
@@ -22,17 +22,20 @@ function QuizTimer({ duration, onTimeUp }) {
 
 
   //effect to update the timer progress and handle time-up
+  const handleTimeUp = useCallback(() => {
+    clearInterval(intervalRef.current);
+    setTimeout(() => {
+      onTimeUp();
+    }, 1000);
+  }, [onTimeUp]);
+
   useEffect(() => {
     setProgress(100 * (counter / duration));
 
     if (counter === duration) {
-      clearInterval(intervalRef.current);
-
-      setTimeout(() => {
-        onTimeUp();
-      }, 1000);
+      handleTimeUp();
     }
-  }, [counter]);
+  }, [counter, duration, handleTimeUp]);
 
   return (
     <div className="question-timer-container">
