@@ -14,24 +14,23 @@ function FilmList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
 
+  
   // Fetch film data when the component mounts
-  const fetchData = async () => {
-    try {
-      const response = await fetchFilms();
-      const data = await response.data;
-      setFilms(data);
-    } catch (error) {
-      console.error("Error fetching films:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchData();
+    setLoading(true);
+    fetchFilms()
+      .then((resp) => resp.data)
+      .then((data) => {
+        setFilms(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching films:", error);
+        setLoading(false);
+      });
   }, []);
-
-  //update the favouritefilms state using spread operator- create a new array for fav films
+  
+  //update the favouritefilms state using spread operator- create a new array for fav films 
   function handleAddToFavourites(film) {
     setFavouriteFilms([...favouriteFilms, film]);
     setAddedToFavourites({ ...addedToFavourites, [film.id]: true });
@@ -60,8 +59,9 @@ function FilmList() {
       .catch((error) => {
         console.error("Error adding film to favorites:", error);
       });
-  }
+  };
 
+  
   // Function to remove a film from favourites
   function handleDeleteFromFavourites(filmId) {
     setFavouriteFilms(favouriteFilms.filter((film) => film.id !== filmId));
@@ -79,50 +79,62 @@ function FilmList() {
       .catch((error) => {
         console.error("Error deleting film:", error);
       });
-  }
-
-  //monitors changes in sortoption, isascending triggering func to update films state
-  const sortFilms = () => {
-    let sortedFilms = [...films];
-    switch (sortOption) {
-      case "title":
-        sortedFilms.sort((a, b) =>
-          isAscending
-            ? a.title.localeCompare(b.title)
-            : b.title.localeCompare(a.title)
-        );
-        break;
-      case "year":
-        sortedFilms.sort((a, b) =>
-          isAscending
-            ? a.release_date.localeCompare(b.release_date)
-            : b.release_date.localeCompare(a.release_date)
-        );
-        break;
-      case "ratings":
-        sortedFilms.sort((a, b) =>
-          isAscending ? a.rt_score - b.rt_score : b.rt_score - a.rt_score
-        );
-        break;
-      case "runningTime":
-        sortedFilms.sort((a, b) =>
-          isAscending
-            ? a.running_time - b.running_time
-            : b.running_time - a.running_time
-        );
-        break;
-      default:
-        break;
-    }
-    setFilms(sortedFilms); 
   };
 
 
-  useEffect(() => {
-    sortFilms();
-  }, [sortOption, isAscending]);
 
-  
+
+// //monitors changes in sortoption, isascending triggering func to update films state
+// useEffect(() => {
+//   sortFilms();
+// }, [sortOption, isAscending]);
+
+
+
+useEffect(() => {
+  const sortFilms = () => {
+    let sortedFilms = [...films]; // Create a copy to avoid mutating original state
+    switch (sortOption) {
+       case "title":
+      sortedFilms.sort((a, b) =>
+        isAscending
+          ? a.title.localeCompare(b.title)
+          : b.title.localeCompare(a.title)
+      );
+      break;
+    case "year":
+      sortedFilms.sort((a, b) =>
+        isAscending
+          ? a.release_date.localeCompare(b.release_date)
+          : b.release_date.localeCompare(a.release_date)
+      );
+      break;
+    case "ratings":
+      sortedFilms.sort((a, b) =>
+        isAscending ? a.rt_score - b.rt_score : b.rt_score - a.rt_score
+      );
+      break;
+    case "runningTime":
+      sortedFilms.sort((a, b) =>
+        isAscending
+          ? a.running_time - b.running_time
+          : b.running_time - a.running_time
+      );
+      break;
+    default:
+      break;
+    }
+    setFilms(sortedFilms);
+  };
+
+  sortFilms();
+}, [sortOption, isAscending, films]); 
+
+
+
+
+
+
   //handles changes in the selected sorting option, updates the state with the new value- triggers re-render
   function handleSortChange(e) {
     setSortOption(e.target.value);
@@ -138,11 +150,11 @@ function FilmList() {
   // Render only the filtered films
   const renderedFilms = filterFilms();
 
-  //updates the searchquery state with the new value from the input field triggering re-render
+  //updates the searchquery state with the new value from the input field triggering re-render 
   function handleSearchInputChange(e) {
     setSearchQuery(e.target.value);
   }
-  //sets the searchquery state to empty string- clear search results
+//sets the searchquery state to empty string- clear search results 
   function handleClearSearch() {
     setSearchQuery("");
   }
@@ -150,7 +162,7 @@ function FilmList() {
   return (
     <div className="main-container">
       <h2>Studio Ghibli Films</h2>
-      <SelectOptions //sorting component receiving props for state management and event handling
+      <SelectOptions                   //sorting component receiving props for state management and event handling
         sortOption={sortOption}
         isAscending={isAscending}
         onSortChange={handleSortChange}
@@ -159,12 +171,12 @@ function FilmList() {
         onSearchChange={handleSearchInputChange}
         onClearSearch={handleClearSearch}
       />
-      {loading ? ( //conditional rendering when or not to display loading message
+      {loading ? (         //conditional rendering when or not to display loading message 
         <p>Loading...</p>
       ) : (
         <div className="film-container">
           {renderedFilms.map((film) => (
-            <FilmCard //film card component for each film displayed- receives props for state management
+            <FilmCard       //film card component for each film displayed- receives props for state management 
               key={film.id}
               film={film}
               addedToFavourites={addedToFavourites}
