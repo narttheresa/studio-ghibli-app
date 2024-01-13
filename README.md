@@ -6,14 +6,14 @@ The Studio Ghibli is a single web application that uses React to allow users to 
 
 ## Table of Contents
 
-- [Features] (#features)
-- [Screenshots] (#screenshots)
-- [Demo] (#demo)
-- [Installation] (#installation)
-- [Usage] (#usage)
-    - [UI Features] (# UI Features)
-- [Contributing] (#contributing)
-- [Credits] (#credits)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+    - [UI Features](#ui-features)
+- [Contributing](#contributing)
+- [Credits](#credits)
 
 ## Features
 
