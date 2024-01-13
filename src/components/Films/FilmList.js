@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { fetchFilms } from "../../Api";
 import "../../Styles/FilmList.css";
 import FilmCard from "./FilmCard";
@@ -17,18 +17,23 @@ function FilmList() {
   
   // Fetch film data when the component mounts
   useEffect(() => {
-    setLoading(true);
-    fetchFilms()
-      .then((resp) => resp.data)
-      .then((data) => {
+    const fetchData = async () => {       //async func fetched films using fetchdata func
+      try {
+        setLoading(true);
+        // Fetch film data
+        const response = await fetchFilms();
+        const data = await response.data;
         setFilms(data);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching films:", error);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
+
   
   //update the favouritefilms state using spread operator- create a new array for fav films 
   function handleAddToFavourites(film) {
@@ -83,66 +88,50 @@ function FilmList() {
 
 
 
+  const sortedFilms = useMemo(() => {
+    let copyFilms = [...films];
 
-// //monitors changes in sortoption, isascending triggering func to update films state
-// useEffect(() => {
-//   sortFilms();
-// }, [sortOption, isAscending]);
+    copyFilms.sort((a, b) => {
+      switch (sortOption) {
+        case "title":
+          return isAscending
+            ? a.title.localeCompare(b.title)
+            : b.title.localeCompare(a.title);
+        case "year":
+          return isAscending
+            ? a.release_date.localeCompare(b.release_date)
+            : b.release_date.localeCompare(a.release_date);
+        case "ratings":
+          return isAscending ? a.rt_score - b.rt_score : b.rt_score - a.rt_score;
+        case "runningTime":
+          return isAscending
+            ? a.running_time - b.running_time
+            : b.running_time - a.running_time;
+        default:
+          return 0;
+      }
+    });
 
-
-
-useEffect(() => {
-  const sortFilms = () => {
-    let sortedFilms = [...films]; // Create a copy to avoid mutating original state
-    switch (sortOption) {
-       case "title":
-      sortedFilms.sort((a, b) =>
-        isAscending
-          ? a.title.localeCompare(b.title)
-          : b.title.localeCompare(a.title)
-      );
-      break;
-    case "year":
-      sortedFilms.sort((a, b) =>
-        isAscending
-          ? a.release_date.localeCompare(b.release_date)
-          : b.release_date.localeCompare(a.release_date)
-      );
-      break;
-    case "ratings":
-      sortedFilms.sort((a, b) =>
-        isAscending ? a.rt_score - b.rt_score : b.rt_score - a.rt_score
-      );
-      break;
-    case "runningTime":
-      sortedFilms.sort((a, b) =>
-        isAscending
-          ? a.running_time - b.running_time
-          : b.running_time - a.running_time
-      );
-      break;
-    default:
-      break;
-    }
-    setFilms(sortedFilms);
-  };
-
-  sortFilms();
-}, [sortOption, isAscending, films]); 
-
-
+    return copyFilms;
+  }, [films, sortOption, isAscending]);
 
 
 
 
   //handles changes in the selected sorting option, updates the state with the new value- triggers re-render
-  function handleSortChange(e) {
-    setSortOption(e.target.value);
-  }
+  const handleSortChange = (e) => {
+    const selectedOption = e.target.value;
+    setSortOption(selectedOption);
+    setIsAscending((prevIsAscending) => {
+      // If the same option is selected, toggle the order
+      return selectedOption === sortOption ? !prevIsAscending : true;
+    });
+  };
+
 
   //filters the film based on searchquery-return a new array containing the filtered films
   function filterFilms() {
-    return films.filter((film) =>
+    return sortedFilms.filter((film) =>
       film.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }
