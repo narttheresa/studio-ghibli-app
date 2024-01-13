@@ -5,6 +5,7 @@ import { faArrowUp, faBars } from "@fortawesome/free-solid-svg-icons";
 import "../Styles/NavBar.css";
 
 function NavBar() {
+  //setting state variables for sticky navbar, screen resizing
   const [isSticky, setIsSticky] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 630);
@@ -34,6 +35,7 @@ function NavBar() {
     };
   }, []);
 
+  //scrolls the window to the top when the icon is clicked
   function handleScrollToTop() {
     window.scrollTo({
       top: 0,
@@ -41,6 +43,7 @@ function NavBar() {
     });
   }
 
+  //toggles the state of ismobilemenuopen to show/hide the menu icon
   function toggleMobileMenu() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   }

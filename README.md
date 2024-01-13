@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Studio Ghibli App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Ghibli text](image.png)
 
-## Available Scripts
+The Studio Ghibli is a single web application that uses React to allow users to explore the Ghibli-verse, compile their list of favourite films and allowing to partake in a quiz to put their Ghibli knowledge to the test!
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Features] (#features)
+- [Screenshots] (#screenshots)
+- [Demo] (#demo)
+- [Installation] (#installation)
+- [Usage] (#usage)
+    - [UI Features] (# UI Features)
+- [Contributing] (#contributing)
+- [Credits] (#credits)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Film Listing:** View a list of Studio Ghibli films released to date.
+- **Customisation:** Create and edit your own favourite list of Ghibli films.
+- **Discovery:** Being able to sort, filter, search about the films' details and characters featured in the franchise 
+- **Responsive and dynamic:** A user-friendly interface that adapts on various viewing devices 
 
-### `npm test`
+## Screenshots
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![gif 1](<gif 1.gif>)
+![gif 2](<gif 2.gif>)
 
-### `npm run build`
+## Demo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Below is the link to the live demo of the web application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[Live Demo](https://studio-ghibli00.netlify.app/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation
 
-### `npm run eject`
+Clone the repository
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```sh
+git clone https://github.com/your-username/studio-ghibli-app.git
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Navigate to the project folder
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```sh
+cd studio-ghibli-app
+```
+Install dependencies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```sh
+npm install
+```
+Start the development server
 
-## Learn More
+```sh 
+npm start
+```
+(The application will be running on http://localhost:3000 or which port is available)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# UI Features:
 
-### Code Splitting
+1. Navigation of Studio Ghibli films: Head over to the "Films" section to view a selection of films that can be sorted based on the title, year, ratings of the selected film.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Searching with ease: Navigate to the "Films" or "Characters" section and find your desired film or character in the search input.
 
-### Analyzing the Bundle Size
+3. Customisation: Create your very own favourite list of films by adding them from the "Films" section to the "Favourites" section.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. Interactivity: Test you Ghibli knowledge by partaking in the quiz section at the end. 
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Contributing:
 
-### Advanced Configuration
+1. Fork the repository.
+2. Create a new branch for your feature: git checkout -b example-name
+3. Commit your changes: git commit -m 'Add new feature'
+4. Push to the branch: git push origin example-name
+5. Open a pull request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Credits
 
-### Deployment
+I'd like to give acknowledgement to the following resources that contributed to my project.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+External libraries:
+- React: Devleoped with the React library
+- FontAwesome: Icons provided by FontAwesome
+- External API: Studio Ghibli API

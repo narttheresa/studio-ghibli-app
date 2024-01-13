@@ -86,8 +86,7 @@ function FilmList() {
       });
   };
 
-
-
+//films sorted based on the selected sorting options(sortoptions) and order(isAscending)
   const sortedFilms = useMemo(() => {
     let copyFilms = [...films];
 
@@ -119,9 +118,9 @@ function FilmList() {
 
 
   //handles changes in the selected sorting option, updates the state with the new value- triggers re-render
-  const handleSortChange = (e) => {
-    const selectedOption = e.target.value;
-    setSortOption(selectedOption);
+  function handleSortChange(e) {
+    const selectedOption = e.target.value;   //extracts the value of the selected sorting option from the event object
+    setSortOption(selectedOption);    //updating the state variable-sortoption 
     setIsAscending((prevIsAscending) => {
       // If the same option is selected, toggle the order
       return selectedOption === sortOption ? !prevIsAscending : true;
