@@ -18,26 +18,26 @@ function FilmList() {
   // Fetch film data when the component mounts
   useEffect(() => {
     const fetchData = async () => {       //async func fetched films using fetchdata func
-      try {
+      try {                             //if any errors persist in the try block it will be caught and handled in the catch 
         setLoading(true);
         // Fetch film data
-        const response = await fetchFilms();
-        const data = await response.data;
+        const resp = await fetchFilms();        //wait until fetchfilms func is complete then return resp
+        const data = await resp.data;
         setFilms(data);
       } catch (error) {
         console.error("Error fetching films:", error);
-      } finally {
+      } finally {                           //ensure loading state is set to false 
         setLoading(false);
       }
     };
 
-    fetchData();
+    fetchData();              //func is invoked after component mount
   }, []);
 
   
   //update the favouritefilms state using spread operator- create a new array for fav films 
   function handleAddToFavourites(film) {
-    setFavouriteFilms([...favouriteFilms, film]);
+    setFavouriteFilms([...favouriteFilms, film]);    //update the state of the favouritefilm array, adding the new film to the list
     setAddedToFavourites({ ...addedToFavourites, [film.id]: true });
 
     // Send a POST request to add the film to favourites on the server
@@ -68,9 +68,9 @@ function FilmList() {
 
   
   // Function to remove a film from favourites
-  function handleDeleteFromFavourites(filmId) {
-    setFavouriteFilms(favouriteFilms.filter((film) => film.id !== filmId));
-    setAddedToFavourites({ ...addedToFavourites, [filmId]: false });
+  function handleDeleteFromFavourites(filmId) {   
+    setFavouriteFilms(favouriteFilms.filter((film) => film.id !== filmId));       //used to update the state of the array, removing the film with the specified filmId
+    setAddedToFavourites({ ...addedToFavourites, [filmId]: false });   //used to update state of state variable, marking the film as not added by setting it to false
 
     // Send a DELETE request to remove the film from favorites on the server
     fetch(`https://studio-ghibli-xt0j.onrender.com/favourites/${filmId}`, {
