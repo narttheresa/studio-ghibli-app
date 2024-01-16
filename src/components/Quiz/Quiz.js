@@ -16,7 +16,9 @@ function Quiz({ questions }) {
   const [showQuizTimer, setShowQuizTimer] = useState(true);     //control visibility of the quiz timer
   const [quizStart, setQuizStart] = useState(false);            //whether the quiz started or not
 
-  const { question, choices, correctAnswer } = questions[currentQuestion];
+  const { question, choices, correctAnswer } = questions[currentQuestion];  //destructures the properties of the current Q from the questions array
+
+//list of event handler funcs
 
   //to start the quiz set it to true
   function startQuiz() {
@@ -39,29 +41,29 @@ function Quiz({ questions }) {
     setShowQuizTimer(false);
     setResult((previous) =>
       finalAnswer
-        ? {
+        ? {                            
             ...previous,
             score: previous.score + 1,
-            correctAnswers: previous.correctAnswers + 1,
+            correctAnswers: previous.correctAnswers + 1,  //increment the score and correct A's in result state
           }
         : {
             ...previous,
-            wrongAnswers: previous.wrongAnswers + 1,
+            wrongAnswers: previous.wrongAnswers + 1,   //increment the wrong answers
           }
     );
-    if (currentQuestion !== questions.length - 1) {
+    if (currentQuestion !== questions.length - 1) {      //checks if there's more Q's
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setCurrentQuestion(0);
       setShowResult(true);
     }
 
-    setTimeout(() => {
-      setShowQuizTimer(true);
+    setTimeout(() => {                              //delay the timer before next Q is visible
+      setShowQuizTimer(true);          
     });
   }
 
-//function to handle show result state
+//function to reset the quiz state to try again
   function onTryAgain() {
     setResult(resultInitialState);
     setShowResult(false);

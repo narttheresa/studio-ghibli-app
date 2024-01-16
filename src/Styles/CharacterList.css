@@ -6,6 +6,8 @@
     padding: 0;
 }
  
+/* search input styling */
+
 .search-bar-wrapper {
     display: flex;
     gap: 15px;
@@ -48,6 +50,7 @@
     background-color: rgb(33, 122, 231);
 }
 
+/* character list/container styling */
 
 .character-list-wrapper  {
     background-image: url(../Assets/ghibli-background.jpg);

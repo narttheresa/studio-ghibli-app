@@ -1,37 +1,22 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../Styles/FavouriteList.css";
+import { deleteFilmFromFavourites } from "./Films/DeleteFilmFromFavourites";
 
 function FavouriteList() {
   //state variable for favourite films
   const [favouriteFilms, setFavouriteFilms] = useState([]);
   
-//asynchronous data fetching when component mounts
-//fetch to retrieve a list of favourite films from the specified api endpoint 
+
   useEffect(() => {
-    fetch("https://studio-ghibli-xt0j.onrender.com/favourites")
-      .then((resp) => resp.json())
-      .then((data) => setFavouriteFilms(data))
-      .catch((error) =>
-        console.error("Error fetching favourite films:", error)
-      );
+    axios.get("https://studio-ghibli-xt0j.onrender.com/favourites")
+      .then((resp) => setFavouriteFilms(resp.data))
+      .catch((error) => console.error("Error fetching favourite films:", error));
   }, []);
 
 //removing a film from the list of favourite films
   function handleRemoveFromFavourites(id) {
-    fetch(`https://studio-ghibli-xt0j.onrender.com/favourites/${id}`,{
-        method: 'DELETE',
-    })
-        .then((resp) => {
-            if(!resp.ok) {
-                throw new Error(`HTTP error. Status: ${resp.status}`);
-            }
-            return fetch('https://studio-ghibli-xt0j.onrender.com/favourites')
-        })
-        .then((resp) => resp.json())
-        .then((data) => setFavouriteFilms(data) )
-        .catch((error) => {
-            console.error('Error removing film from favourites:', error);
-        })
+    deleteFilmFromFavourites(id, setFavouriteFilms);
   }
 
   return (

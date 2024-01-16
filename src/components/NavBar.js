@@ -6,13 +6,13 @@ import "../Styles/NavBar.css";
 
 function NavBar() {
   //setting state variables for sticky navbar, screen resizing
-  const [isSticky, setIsSticky] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);     //based on scroll position
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);    //when mobile menu show be used
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 630);
-  const scrollThreshold = 40;
+  const scrollThreshold = 0;
   const mobileMenuThreshold = 630;
 
-  useEffect(() => {
+  useEffect(() => {        //event listeners for scroll and resize events, update states accordingly
     function handleScroll() {
       setIsSticky(window.scrollY > scrollThreshold);
     }

@@ -21,14 +21,15 @@ function QuizTimer({ duration, onTimeUp }) {
   }, []);       //empty dep array to ensure the effect runs once only when on mount
 
 
-  //effect to update the timer progress and handle time-up
+  //handling the time-up event
   const handleTimeUp = useCallback(() => {
-    clearInterval(intervalRef.current);
+    clearInterval(intervalRef.current);    //clears the interval properly previously set
     setTimeout(() => {
-      onTimeUp();
+      onTimeUp();            //delay ontimeup by a sec then invoke the callback
     }, 1000);
   }, [onTimeUp]);
 
+  //updates the progress state based on the % of time elapsed
   useEffect(() => {
     setProgress(100 * (counter / duration));
 

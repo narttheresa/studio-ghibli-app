@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+
 
 function FilmCard({   //props passed through from filmlist comp
   film,
-  addedToFavourites,
   onAddToFavourites,
   onDeleteFromFavourites,
 }) {
 
+  const [isInFavourites, setIsInFavourites] =useState(false);
+
+ useEffect(() => {
+    axios.get(`https://studio-ghibli-xt0j.onrender.com/favourites?title=${film.title}`)
+      .then((resp) => setIsInFavourites(resp.data.length))
+      .catch((error) => console.error("Error fetching favourites:", error))
+ }, [film.title]);
 
   function starRating(rt_score) {
     const fullStars = Math.floor(rt_score / 20);        //each star represents 20 points
@@ -18,12 +27,12 @@ function FilmCard({   //props passed through from filmlist comp
 // loops for full stars and appends a full star to the star array 
 //conditional statement: if halfstar is 1 it appends a halfstar icon with a smaller width
 //loops for empty stars
-    for (let i = 0; i < fullStars; i++) {
+    for (let i = 0; i < fullStars; i++) {               
       stars.push(<span key={i}>&#9733;</span>);
     }
 
-    if (halfStars) {
-      stars.push(
+    if (halfStars) {                                                                  
+      stars.push(     
         <span key="half" style={{ width: "10px" }}>
           &#9733;
         </span>
@@ -35,10 +44,21 @@ function FilmCard({   //props passed through from filmlist comp
 
     return stars;
   }
-//conditional classname if the film is in favouriteslist container or not
-//conditional displays either add/remove to favourites based on the film's favourite status- triggers the listed functions when clicked
+
+  function handleToggleFavourites() {
+    if (isInFavourites) {
+      onDeleteFromFavourites(film.id);
+    } else {
+      onAddToFavourites(film);
+    }
+
+    // Toggle the state after the button click
+    setIsInFavourites((prevIsInFavourites) => !prevIsInFavourites);
+  };
+  
+
   return (
-    <div className={`film-card ${addedToFavourites[film.id] ? "added-to-favourites" : ""}`}>   
+    <div className={`film-card ${isInFavourites ? "added-to-favourites" : ""}`}>
       <img src={film.image} alt={film.title} />
       <h3>{film.title}</h3>
       <p>Rating: {starRating(film.rt_score)}</p>
@@ -46,14 +66,9 @@ function FilmCard({   //props passed through from filmlist comp
         {film.release_date} | {film.running_time}min
       </small>
       <p className="description">{film.description}</p>
-      <button onClick={() => onAddToFavourites(film)}>
-        {addedToFavourites[film.id] ? "Added to Favourites" : "Add to Favourites"}
+      <button onClick={handleToggleFavourites}>
+        {isInFavourites ? "Remove from Favourites" : "Add to Favourites"}
       </button>
-      {addedToFavourites[film.id] && (
-        <button onClick={() => onDeleteFromFavourites(film.id)}>
-          Remove from Favourites
-        </button>
-      )}
     </div>
   );
 }

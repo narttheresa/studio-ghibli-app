@@ -1,4 +1,4 @@
-import axios from "axios";  //used to make HTTP requests to backend
+import axios from "axios";  //used to make HTTP requests
 
 //base URL of the backend server
 const baseURL = "https://studio-ghibli-xt0j.onrender.com";
